@@ -36,7 +36,7 @@ export default {
       margin-top  .12rem
       margin-left .2rem
       padding-left .2rem
-      background #eee
+      background #fff
       border-radius .2rem
       color #ccc
     .header-right
