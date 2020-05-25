@@ -6,11 +6,11 @@
 
 - 上传到分支上后切换为主分支
 1. git  checkout master
-同步代码
+  同步代码
 2. git pull origin master
-合并分支
+  合并分支
 3. git  merge dev
-查看状态
+  查看状态
 4. git status
-push到远端
+  push到远端
 5. git push origin master
