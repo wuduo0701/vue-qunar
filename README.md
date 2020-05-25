@@ -3,6 +3,10 @@
 像素比：
 在html中(reset.css)
 1 rem = 50 px
+- 创建分支，同步
+1. git checkout -b 分支名       创建并切换到该分支
+
+2. git push origin 分支名     远端同步分支
 
 - 上传到分支上后切换为主分支
 1. git  checkout master
