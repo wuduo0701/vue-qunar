@@ -25,41 +25,8 @@
 <script>
 export default {
   name: 'HomeWeekends',
-  data () {
-    return {
-      weekendList: [
-        {
-          id: '0001',
-          imgUrl: 'https://imgs.qunarzz.com/sight/source/1505/74/a665dfecf12ae.jpg_r_640x214_5d22909a.jpg',
-          productName: '南昌必游TOP10',
-          productDesc: '看山看水，看看历史对南昌的浸润'
-        },
-        {
-          id: '0002',
-          imgUrl: 'https://imgs.qunarzz.com/sight/source/1505/bd/688c12889af7ad.jpg_r_640x214_cc490c32.jpg',
-          productName: 'happy乐园',
-          productDesc: '在这里玩转乐园，疯玩起来，无忧无虑一整天！'
-        },
-        {
-          id: '0003',
-          imgUrl: 'https://imgs.qunarzz.com/sight/source/1505/df/9bcc134d126bc4.jpg_r_640x214_58a1f389.jpg',
-          productName: '陶醉青山绿水',
-          productDesc: '一年四季景色秀丽，层峦叠嶂，岩石高高耸立，白雾弥漫，犹如人间仙境'
-        },
-        {
-          id: '0004',
-          imgUrl: 'https://imgs.qunarzz.com/sight/source/1811/24/30f714149293b6.jpg_r_640x214_bfa37f12.jpg',
-          productName: '狮子峰等你',
-          productDesc: '有黄山之险，悬崖峭壁，这里有满山的翠竹、青藤，堪称人间仙境世外桃源'
-        },
-        {
-          id: '0005',
-          imgUrl: 'https://imgs.qunarzz.com/sight/source/1505/d7/0833d5e316d76f.jpg_r_640x214_258e1eb8.jpg',
-          productName: '当地特色',
-          productDesc: '独特的自然景色，历史遗留景观，是南昌的特色。'
-        }
-      ]
-    }
+  props: {
+    weekendList: Array
   }
 }
 </script>

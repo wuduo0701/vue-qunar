@@ -7,14 +7,17 @@
       <span class="iconfont">&#xe632;</span>
       搜索景点门票
     </div>
-    <div class="header-right">城市
+    <div class="header-right">{{this.city}}
       <span class="iconfont dowmicon">&#xe612;</span>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  props: {
+    city: String
+  }
 }
 </script>
 <style lang="stylus" scoped>
