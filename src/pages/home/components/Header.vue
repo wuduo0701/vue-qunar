@@ -7,9 +7,11 @@
       <span class="iconfont">&#xe632;</span>
       搜索景点门票
     </div>
-    <div class="header-right">{{this.city}}
-      <span class="iconfont dowmicon">&#xe612;</span>
-    </div>
+    <router-link to="/city">
+      <div class="header-right">{{this.city}}
+        <span class="iconfont dowmicon">&#xe612;</span>
+      </div>
+    </router-link>
   </div>
 </template>
 <script>
@@ -46,6 +48,7 @@ export default {
       width 1.24rem
       float right
       text-align center
+      color #fff
       .dowmicon
         margin-top -2rem
         font-size .3rem
