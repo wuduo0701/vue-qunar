@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'CityHeader'
+  name: 'CitySearch'
 }
 </script>
 <style lang="stylus" scoped>
