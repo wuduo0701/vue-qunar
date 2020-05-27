@@ -2,8 +2,17 @@
   <div>
     <CityHeader></CityHeader>
     <CitySearch></CitySearch>
-    <CityList :hotCities="hotCities" :cities="cities"></CityList>
-    <CityRight :cities="cities"></CityRight>
+    <CityList
+      :hotCities="hotCities"
+      :cities="cities"
+      :letter="letter"
+    >
+    </CityList>
+    <CityRight
+      :cities="cities"
+      @changeCity="handleChangeCity"
+    >
+    </CityRight>
   </div>
 </template>
 <script>
@@ -25,7 +34,9 @@ export default {
       //  热门城市
       hotCities: [],
       // 城市集合
-      cities: {}
+      cities: {},
+      // 字母排序
+      letter: ''
     }
   },
   methods: {
@@ -40,6 +51,10 @@ export default {
         this.hotCities = data.hotCities
         this.cities = data.cities
       }
+    },
+    //  实现兄弟组件的字母传值
+    handleChangeCity (letter) {
+      this.letter = letter
     }
   },
   mounted () {

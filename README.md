@@ -18,3 +18,9 @@
 4. git status
   push到远端
 5. git push origin master
+
+- 遇到的问题
+原本使用fastClick.js解决移动端300ms延迟的时候，快速的点击页面，出现如下报错：
+```
+  Unable to preventDefault inside passive event listener due to target being treated
+```
