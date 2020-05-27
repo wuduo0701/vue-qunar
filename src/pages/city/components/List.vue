@@ -12,64 +12,28 @@
     <div class="area border-topbottom">
       <div class="title">热门城市</div>
       <div class="button-list">
-        <div class="button-container">
-          <div class="button">北京</div>
-        </div>
-        <div class="button-container">
-          <div class="button">上海</div>
-        </div>
-        <div class="button-container">
-          <div class="button">三亚</div>
-        </div>
-        <div class="button-container">
-          <div class="button">香港</div>
-        </div>
-        <div class="button-container">
-          <div class="button">杭州</div>
-        </div>
-        <div class="button-container">
-          <div class="button">广州</div>
-        </div>
-        <div class="button-container">
-          <div class="button">成都</div>
-        </div>
-        <div class="button-container">
-          <div class="button">深圳</div>
-        </div>
-        <div class="button-container">
-          <div class="button">苏州</div>
-        </div>
-        <div class="button-container">
-          <div class="button">桂林</div>
-        </div>
-        <div class="button-container">
-          <div class="button">西安</div>
-        </div>
-        <div class="button-container">
-          <div class="button">厦门</div>
+        <div
+          class="button-container"
+          v-for="item in hotCities"
+          :key="item.id"
+        >
+          <div class="button">{{item.name}}</div>
         </div>
       </div>
     </div>
-    <div class="area">
-      <div class="title border-topbottom">A</div>
+    <div class="area"
+      v-for="(city, key) in cities"
+      :key="key"
+    >
+      <div class="title border-topbottom">{{key}}</div>
       <div class="item-list">
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
-      </div>
-    </div>
-        <div class="area">
-      <div class="title border-topbottom">A</div>
-      <div class="item-list">
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
-        <div class="item border-bottom">阿拉尔</div>
+        <div
+          class="item border-bottom"
+          v-for="item in city"
+          :key="item.id"
+        >
+          {{item.name}}
+        </div>
       </div>
     </div>
   </div>
@@ -79,6 +43,10 @@
 import Bscroll from 'better-scroll'
 export default {
   name: 'CityList',
+  props: {
+    hotCities: Array,
+    cities: Object
+  },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
   }
