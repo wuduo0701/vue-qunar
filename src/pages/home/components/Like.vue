@@ -6,10 +6,12 @@
       <span class="like-title-name">猜你喜欢</span>
     </div>
     <ul class="like-list">
-      <li
+      <router-link
+        tag="li"
         class="item border-bottom"
         v-for="item in likeList"
         :key="item.id"
+        :to="'/detail/' + item.id"
       >
         <div class="item-img-container">
           <img :src="item.imgUrl" class="item-img">
@@ -22,7 +24,7 @@
           <span class="item-price">￥{{item.price}}</span>起
           <span class="item-address">{{item.address}}</span>
         </div>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>
