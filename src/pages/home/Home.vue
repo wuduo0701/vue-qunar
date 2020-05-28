@@ -9,6 +9,7 @@
 </template>
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import HomeHeader from './components/Header'
 import HomeSwiper from './components/Swiper'
 import HomeIcons from './components/Icons'
@@ -25,6 +26,7 @@ export default {
   },
   data () {
     return {
+      lastCity: '',
       // 轮播图
       swiperList: [],
       // 首页icon
@@ -35,9 +37,12 @@ export default {
       weekendList: []
     }
   },
+  computed: {
+    ...mapState(['city'])
+  },
   methods: {
     getHomeInfo () {
-      axios.get('/api/home.json')
+      axios.get('/api/home.json?city=' + this.city)
         .then(this.getHomeInfoSucc)
     },
     // axios传值
@@ -53,7 +58,16 @@ export default {
     }
   },
   mounted () {
+    this.lastCity = this.city
     this.getHomeInfo()
+  },
+  //  借助keep-alive的生命周期activated，判断切换的城市是否与上次一样
+  //  一样则不发ajax请求。否则重新发ajax
+  activated () {
+    if (this.lastCity !== this.city) {
+      this.lastCity = this.city
+      this.getHomeInfo()
+    }
   }
 }
 </script>
