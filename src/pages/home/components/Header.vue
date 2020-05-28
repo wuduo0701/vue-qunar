@@ -8,7 +8,7 @@
       搜索景点门票
     </div>
     <router-link to="/city">
-      <div class="header-right">{{this.city}}
+      <div class="header-right">{{this.$store.state.city}}
         <span class="iconfont dowmicon">&#xe612;</span>
       </div>
     </router-link>
@@ -16,10 +16,7 @@
 </template>
 <script>
 export default {
-  name: 'Header',
-  props: {
-    city: String
-  }
+  name: 'Header'
 }
 </script>
 <style lang="stylus" scoped>

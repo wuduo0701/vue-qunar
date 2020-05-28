@@ -5,7 +5,7 @@
       <div class="title border-topbottom">当前城市</div>
       <div class="button-list">
         <div class="button-container">
-          <div class="button">南昌</div>
+          <div class="button">{{this.$store.state.city}}</div>
         </div>
       </div>
     </div>
@@ -16,6 +16,7 @@
           class="button-container"
           v-for="item in hotCities"
           :key="item.id"
+          @click="ChangeCity(item.name)"
         >
           <div class="button">{{item.name}}</div>
         </div>
@@ -32,6 +33,7 @@
           class="item border-bottom"
           v-for="item in city"
           :key="item.id"
+          @click="ChangeCity(item.name)"
         >
           {{item.name}}
         </div>
@@ -48,6 +50,12 @@ export default {
     hotCities: Array,
     cities: Object,
     letter: String
+  },
+  methods: {
+    ChangeCity (city) {
+      this.$store.commit('changeCurrentCity', city)
+      this.$router.push('/')
+    }
   },
   watch: {
     // 监听点击的字母变化

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HomeHeader :city="city"></HomeHeader>
+    <HomeHeader></HomeHeader>
     <HomeSwiper :swiperList="swiperList"></HomeSwiper>
     <HomeIcons :IconList="IconList"></HomeIcons>
     <HomeLike :likeList="likeList"></HomeLike>
@@ -25,8 +25,6 @@ export default {
   },
   data () {
     return {
-      //  城市
-      city: '',
       // 轮播图
       swiperList: [],
       // 首页icon
@@ -47,7 +45,6 @@ export default {
       res = res.data
       if (res.success && res.data) {
         const data = res.data
-        this.city = data.city
         this.swiperList = data.swiperList
         this.IconList = data.IconList
         this.likeList = data.likeList

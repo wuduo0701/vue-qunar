@@ -18,6 +18,7 @@
           class="search-item border-bottom"
           v-for="item in list"
           :key="item.id"
+          @click="ChangeCity(item.name)"
         >
           {{item.name}}
         </li>
@@ -46,6 +47,12 @@ export default {
   computed: {
     hasNoList () {
       return !this.list.length
+    }
+  },
+  methods: {
+    ChangeCity (city) {
+      this.$store.commit('changeCurrentCity', city)
+      this.$router.push('/')
     }
   },
   watch: {
