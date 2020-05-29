@@ -9,7 +9,10 @@
       <span class="header-back-bg"></span>
       <span class="header-back-icon iconfont">&#xe624;</span>
     </router-link>
-    <div class="header-fixed" v-show="!showHeaderBack" :style="opacityStyle">
+    <div
+    class="header-fixed"
+    v-show="!showHeaderBack"
+    :style="opacityStyle">
       <router-link to="/">
         <div class="iconfont header-fixed-back">&#xe624;</div>
       </router-link>
@@ -45,6 +48,10 @@ export default {
   },
   activated () {
     window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated () {
+    // 全局事件解绑
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
