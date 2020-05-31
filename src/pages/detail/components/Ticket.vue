@@ -11,7 +11,7 @@
           <div class="ticket-list-continer border">
             <!-- 在此循环 -->
             <div class="ticket-list border-top">
-              <div class="ticket-type-info">
+              <div class="ticket-type-info" @click="changeShowItem">
                 <h5 class="ticket-type-name">成人票（提前订）</h5>
                 <div class="ticket-type-price">
                   <span class="price-money">￥</span>
@@ -20,16 +20,33 @@
                 </div>
                 <div class="ticket-type-icon iconfont">&#xe63e;</div>
               </div>
+              <div  v-show="isShowItem">
+                <TicketItem></TicketItem>
+              </div>
             </div>
-          </div>      
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import TicketItem from './TicketItem'
 export default {
-  name: 'DetailTicket'
+  name: 'DetailTicket',
+  components: {
+    TicketItem
+  },
+  data () {
+    return {
+      isShowItem: false
+    }
+  },
+  methods: {
+    changeShowItem () {
+      this.isShowItem = !this.isShowItem
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
