@@ -3,13 +3,13 @@
     <div class="flexbox flex-card">
       <div class="flexbox-item">
         <div>
-          <span class="comment-card-score">5.0</span>
+          <span class="comment-card-score">{{BaseInfo.score}}</span>
           <span class="comment-card-text">分</span>
-          <span class="comment-card-desc">超赞</span>
+          <span class="comment-card-desc">{{BaseInfo.feel}}</span>
         </div>
         <div>
-          <span class="comment-num">20291条评论</span>
-          <span class="comment-num">4条攻略</span>
+          <span class="comment-num">{{BaseInfo.commentNum}}条评论</span>
+          <span class="comment-num">{{BaseInfo.Introduction}}条攻略</span>
           <span class="iconfont right-arrow">&#xe68c;</span>
         </div>
       </div>
@@ -26,7 +26,7 @@
     <div class="baseinfo-address border-top">
       <p class="baseinfo-address-text">
         <span class="iconfont baseinfo-address-icon">&#xe60f;</span>
-        江西省南昌市九龙湖新区南龙蟠街888号
+        {{BaseInfo.address}}
         <span class="iconfont baseinfo-address-arrow">&#xe68c;</span>
       </p>
     </div>
@@ -34,7 +34,10 @@
 </template>
 <script>
 export default {
-  name: 'DetailInfo'
+  name: 'DetailInfo',
+  props: {
+    BaseInfo: Object
+  }
 }
 </script>
 <style lang="stylus" scoped>

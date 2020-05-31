@@ -1,16 +1,21 @@
 <template>
   <div>
     <div class="banner" @click="showGallery">
-      <img class="banner-img" src="//img1.qunarzz.com/sight/p0/2004/5c/5c97bfb4aaf82866a3.img.jpg_600x330_844f712f.jpg">
+      <img class="banner-img" :src="BannerInfo.bannerImg">
       <div class="banner-info">
-        <div class="banner-info-title">南昌融创乐园</div>
+        <div class="banner-info-title">{{BannerInfo.sightName}}</div>
         <div class="banner-info-number">
           <span class="iconfont banner-icon">&#xe63d;</span>
-          39
+          {{BannerInfo.gallaryImgNum}}
         </div>
       </div>
     </div>
-    <Gallery :imgUrl="imgUrl" v-show="isShowGallery" @closeGallery="closeGallery"></Gallery>
+    <Gallery
+      :imgUrl="BannerInfo.gallaryImgs"
+      v-show="isShowGallery"
+      @closeGallery="closeGallery"
+    >
+    </Gallery>
   </div>
 </template>
 <script>
@@ -19,12 +24,11 @@ export default {
   name: 'DetailBanner',
   data () {
     return {
-      isShowGallery: false,
-      imgUrl: [
-        'http://img1.qunarzz.com/sight/p0/2004/5c/5c97bfb4aaf82866a3.img.jpg_r_800x800_1259526e.jpg',
-        'http://img1.qunarzz.com/sight/p0/2004/5c/5c97bfb4aaf82866a3.img.jpg_r_800x800_1259526e.jpg'
-      ]
+      isShowGallery: false
     }
+  },
+  props: {
+    BannerInfo: Object
   },
   components: {
     Gallery

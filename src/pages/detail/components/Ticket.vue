@@ -1,27 +1,27 @@
 <template>
   <div class="ticket-shelf">
-    <div class="ticket-continer">
+    <div class="ticket-continer" v-for="item in TicketInfo" :key="item.id">
       <h3 class="ticket-title">景区门票</h3>
       <p class="ticket-shelf-name">
         <span class="ticket-shelf-border"></span>
-        <span>南昌融创乐园（40台）设备通票</span>
+        <span>{{item.ticketTitle}}</span>
       </p>
       <div class="ticket-type-list">
         <div class="ticket-group border-bottom">
           <div class="ticket-list-continer border">
             <!-- 在此循环 -->
-            <div class="ticket-list border-top">
+            <div class="ticket-list border-top" v-for="ticket in item.ticketType" :key="ticket.id">
               <div class="ticket-type-info" @click="changeShowItem">
-                <h5 class="ticket-type-name">成人票（提前订）</h5>
+                <h5 class="ticket-type-name">{{ticket.type}}</h5>
                 <div class="ticket-type-price">
                   <span class="price-money">￥</span>
-                  <em class="price-num">158</em>
+                  <em class="price-num">{{ticket.price}}</em>
                   <span class="price-numword">起</span>
                 </div>
                 <div class="ticket-type-icon iconfont">&#xe63e;</div>
               </div>
-              <div  v-show="isShowItem">
-                <TicketItem></TicketItem>
+              <div  v-show="isShowItem" v-for="ticketItem in ticket.ticketItem" :key="ticketItem.id">
+                <TicketItem :ticketItem="ticketItem"></TicketItem>
               </div>
             </div>
           </div>
@@ -41,6 +41,9 @@ export default {
     return {
       isShowItem: false
     }
+  },
+  props: {
+    TicketInfo: Array
   },
   methods: {
     changeShowItem () {
