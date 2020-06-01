@@ -28,7 +28,7 @@
             ￥
             <em class="sale-num">{{ticketItem.itemPrice}}</em>
           </strong>
-          <em class="ticket-item-Btn">立即预定</em>
+          <em class="ticket-item-Btn" @click="reserveNow">立即预定</em>
         </div>
       </div>
     </div>
@@ -41,8 +41,8 @@ export default {
     ticketItem: Object
   },
   methods: {
-    hello (id) {
-      console.log(id)
+    reserveNow () {
+      alert('预定成功啦😊')
     }
   }
 }

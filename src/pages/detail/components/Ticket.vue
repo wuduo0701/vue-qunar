@@ -1,28 +1,30 @@
 <template>
   <div class="ticket-shelf">
-    <div class="ticket-continer" v-for="item in TicketInfo" :key="item.id">
+    <div class="ticket-continer">
       <h3 class="ticket-title">景区门票</h3>
-      <p class="ticket-shelf-name">
-        <span class="ticket-shelf-border"></span>
-        <span>{{item.ticketTitle}}</span>
-      </p>
-      <div class="ticket-type-list">
-        <div class="ticket-group border-bottom">
-          <div class="ticket-list-continer border">
-            <!-- 在此循环 -->
-            <div v-for="(ticket, index) in item.ticketType" :key="ticket.id">
-              <div class="ticket-list border-top" >
-                <div class="ticket-type-info" @click="changeShowItem(index+1)">
-                  <h5 class="ticket-type-name">{{ticket.type}}</h5>
-                  <div class="ticket-type-price">
-                    <span class="price-money">￥</span>
-                    <em class="price-num">{{ticket.price}}</em>
-                    <span class="price-numword">起</span>
+      <div v-for="item in TicketInfo" :key="item.id">
+        <p class="ticket-shelf-name">
+          <span class="ticket-shelf-border"></span>
+          <span>{{item.ticketTitle}}</span>
+        </p>
+        <div class="ticket-type-list">
+          <div class="ticket-group border-bottom">
+            <div class="ticket-list-continer border">
+              <!-- 在此循环 -->
+              <div v-for="(ticket) in item.ticketType" :key="ticket.id">
+                <div class="ticket-list border-top" >
+                  <div class="ticket-type-info" @click="changeShowItem(ticket.id)">
+                    <h5 class="ticket-type-name">{{ticket.type}}</h5>
+                    <div class="ticket-type-price">
+                      <span class="price-money">￥</span>
+                      <em class="price-num">{{ticket.price}}</em>
+                      <span class="price-numword">起</span>
+                    </div>
+                    <div class="ticket-type-icon iconfont">&#xe63e;</div>
                   </div>
-                  <div class="ticket-type-icon iconfont">&#xe63e;</div>
-                </div>
-                <div v-for="ticketItem in ticket.ticketItem" :key="ticketItem.id">
-                  <TicketItem :ticketItem="ticketItem" v-show="switchItem(ticketItem.key)"></TicketItem>
+                  <div v-for="ticketItem in ticket.ticketItem" :key="ticketItem.id">
+                    <TicketItem :ticketItem="ticketItem" v-show="switchItem(ticketItem.key)"></TicketItem>
+                  </div>
                 </div>
               </div>
             </div>

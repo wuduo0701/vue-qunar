@@ -1,10 +1,12 @@
 <template>
   <div>
-    <DetailBanner :BannerInfo="BannerInfo"></DetailBanner>
-    <DetailHeader></DetailHeader>
-    <DetailInfo :BaseInfo="BaseInfo"></DetailInfo>
-    <DetailTicket :TicketInfo="TicketInfo"></DetailTicket>
-    <div class="content"></div>
+    <div v-for="item in allSight" :key="item.id">
+      <DetailBanner :BannerInfo="item.BannerInfo"></DetailBanner>
+      <DetailHeader></DetailHeader>
+      <DetailInfo :BaseInfo="item.baseInfo"></DetailInfo>
+      <DetailTicket :TicketInfo="item.ticketInfo"></DetailTicket>
+      <div class="content"></div>
+    </div>
   </div>
 </template>
 <script>
@@ -23,11 +25,8 @@ export default {
   },
   data () {
     return {
-      //  banner信息
-      BannerInfo: {},
-      BaseInfo: {},
-      //  门票信息
-      TicketInfo: []
+      //  景点信息
+      allSight: []
     }
   },
   methods: {
@@ -39,10 +38,7 @@ export default {
       res = res.data
       if (res.success && res.data) {
         const data = res.data
-        console.log(data.ticketInfo)
-        this.BannerInfo = data.BannerInfo
-        this.BaseInfo = data.baseInfo
-        this.TicketInfo = data.ticketInfo
+        this.allSight = data.allSight
       }
     }
   },
@@ -53,5 +49,5 @@ export default {
 </script>
 <style lang="stylus" scoped>
   .content
-    height 50rem
+    height 100vh
 </style>
