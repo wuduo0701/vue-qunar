@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div v-for="item in allSight" :key="item.id">
+    <div
+      v-for="item in allSight"
+      :key="item.id"
+    >
       <DetailBanner :BannerInfo="item.BannerInfo"></DetailBanner>
       <DetailHeader></DetailHeader>
       <DetailInfo :BaseInfo="item.baseInfo"></DetailInfo>
       <DetailTicket :TicketInfo="item.ticketInfo"></DetailTicket>
       <DetailFooter></DetailFooter>
-      <!-- <div class="content"></div> -->
     </div>
   </div>
 </template>
@@ -38,10 +40,16 @@ export default {
         .then(this.getDetaiInfoSucc)
     },
     getDetaiInfoSucc (res) {
+      //  动态路由参数
+      const routeId = this.$route.params.id
       res = res.data
+      const allSight = res.data.allSight
       if (res.success && res.data) {
-        const data = res.data
-        this.allSight = data.allSight
+        //  筛选出对应路由的数据
+        const sightNow = allSight.filter(item => {
+          return item.id === routeId
+        })
+        this.allSight = sightNow
       }
     }
   },
@@ -51,6 +59,4 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-  .content
-    height 100%
 </style>

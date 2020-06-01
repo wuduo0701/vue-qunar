@@ -10,8 +10,10 @@
         <div class="ticket-type-list">
           <div class="ticket-group border-bottom">
             <div class="ticket-list-continer border">
-              <!-- 在此循环 -->
-              <div v-for="(ticket) in item.ticketType" :key="ticket.id">
+              <div
+                v-for="(ticket) in item.ticketType"
+                :key="ticket.id"
+              >
                 <div class="ticket-list border-top" >
                   <div class="ticket-type-info" @click="changeShowItem(ticket.id)">
                     <h5 class="ticket-type-name">{{ticket.type}}</h5>
@@ -22,7 +24,10 @@
                     </div>
                     <div class="ticket-type-icon iconfont">&#xe63e;</div>
                   </div>
-                  <div v-for="ticketItem in ticket.ticketItem" :key="ticketItem.id">
+                  <div
+                    v-for="ticketItem in ticket.ticketItem"
+                    :key="ticketItem.id"
+                  >
                     <TicketItem :ticketItem="ticketItem" v-show="switchItem(ticketItem.key)"></TicketItem>
                   </div>
                 </div>
