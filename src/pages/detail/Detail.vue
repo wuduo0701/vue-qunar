@@ -5,7 +5,8 @@
       <DetailHeader></DetailHeader>
       <DetailInfo :BaseInfo="item.baseInfo"></DetailInfo>
       <DetailTicket :TicketInfo="item.ticketInfo"></DetailTicket>
-      <div class="content"></div>
+      <DetailFooter></DetailFooter>
+      <!-- <div class="content"></div> -->
     </div>
   </div>
 </template>
@@ -15,13 +16,15 @@ import DetailBanner from './components/Banner'
 import DetailHeader from './components/Header'
 import DetailInfo from './components/BaseInfo'
 import DetailTicket from './components/Ticket'
+import DetailFooter from './components/Footer'
 export default {
   name: 'Detail',
   components: {
     DetailBanner,
     DetailHeader,
     DetailInfo,
-    DetailTicket
+    DetailTicket,
+    DetailFooter
   },
   data () {
     return {
@@ -49,5 +52,5 @@ export default {
 </script>
 <style lang="stylus" scoped>
   .content
-    height 100vh
+    height 100%
 </style>
