@@ -3,18 +3,18 @@
     <div class="ticket-item flex-box border-top">
       <div class="ticket-item-main flexbox-layout">
         <div>
-          <h6 class="tickey-title">南昌融创乐园（30）台设备成人通票（仅限非南昌户籍使用）</h6>
+          <h6 class="tickey-title">{{ticketItem.itemTitle}}</h6>
           <ul class="ticket-light">
             <span class="ticket-desctag">
               <img class="ticket-desctag-icon" src="https://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20202/ea3f321aea9fbf93098a78bdddd3306f.png">
-              23:59前可订明日
+              {{ticketItem.itemTime}}
             </span>
           </ul>
           <ul class="ticket-retreat">
             <span class="ticket-label border">条件退</span>
           </ul>
           <div class="ticket-supplier">
-            <span>蓝精灵</span>
+            <span>{{ticketItem.itemInfo}}</span>
             <span class="ticket-info border-left">
               预定须知
               <span class="ticket-icon iconfont">&#xe68c;</span>
@@ -26,7 +26,7 @@
         <div class="ticket-item-link">
           <strong class="ticket-sale">
             ￥
-            <em class="sale-num">188</em>
+            <em class="sale-num">{{ticketItem.itemPrice}}</em>
           </strong>
           <em class="ticket-item-Btn">立即预定</em>
         </div>
@@ -36,7 +36,15 @@
 </template>
 <script>
 export default {
-  name: 'TicketItem'
+  name: 'TicketItem',
+  props: {
+    ticketItem: Object
+  },
+  methods: {
+    hello (id) {
+      console.log(id)
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
