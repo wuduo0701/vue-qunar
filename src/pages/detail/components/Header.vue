@@ -46,6 +46,7 @@ export default {
       }
     }
   },
+  // keep-alive的exclude的存在会使activated生命周期函数失效,所有改为mounted
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
   },
