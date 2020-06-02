@@ -27,3 +27,7 @@
 
 借助keep-alive的生命周期activated，判断切换的城市是否与上次一样
 一样则不发ajax请求。否则重新发ajax
+
+
+vue中keep-alive的exclude的存在会使activated生命周期函数失效
+所有改为了mounted 和 beforeDestroy 生命周期
