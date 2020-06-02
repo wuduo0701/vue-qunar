@@ -3,6 +3,7 @@
     <HomeHeader></HomeHeader>
     <HomeSwiper :swiperList="swiperList"></HomeSwiper>
     <HomeIcons :IconList="IconList"></HomeIcons>
+    <HomeHotSight :hotWenkend="hotWenkend"></HomeHotSight>
     <HomeLike :likeList="likeList"></HomeLike>
     <HomeWeekends :weekendList="weekendList"></HomeWeekends>
   </div>
@@ -13,6 +14,7 @@ import { mapState } from 'vuex'
 import HomeHeader from './components/Header'
 import HomeSwiper from './components/Swiper'
 import HomeIcons from './components/Icons'
+import HomeHotSight from './components/HotSight'
 import HomeLike from './components/Like'
 import HomeWeekends from './components/Weekends'
 export default {
@@ -21,6 +23,7 @@ export default {
     HomeHeader,
     HomeSwiper,
     HomeIcons,
+    HomeHotSight,
     HomeLike,
     HomeWeekends
   },
@@ -34,7 +37,9 @@ export default {
       // 猜你喜欢
       likeList: [],
       // 周末去哪儿
-      weekendList: []
+      weekendList: [],
+      // 本周热门
+      hotWenkend: []
     }
   },
   computed: {
@@ -54,6 +59,7 @@ export default {
         this.IconList = data.IconList
         this.likeList = data.likeList
         this.weekendList = data.weekendList
+        this.hotWenkend = data.hotList
       }
     }
   },
