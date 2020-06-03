@@ -4,7 +4,7 @@
     <ul>
       <li class="weekend-item" v-for="item in weekendList" :key="item.id">
         <div class="item-img-container">
-          <img class="item-img" :src="item.imgUrl" alt="">
+          <img class="item-img" :src="item.imgUrl">
         </div>
         <div class="item-info">
           <p class="item-name">{{item.productName}}</p>

@@ -10,9 +10,10 @@
       <span class="header-back-icon iconfont">&#xe624;</span>
     </router-link>
     <div
-    class="header-fixed"
-    v-show="!showHeaderBack"
-    :style="opacityStyle">
+      class="header-fixed"
+      v-show="!showHeaderBack"
+      :style="opacityStyle"
+    >
       <router-link to="/">
         <div class="iconfont header-fixed-back">&#xe624;</div>
       </router-link>
