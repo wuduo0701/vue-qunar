@@ -8,6 +8,7 @@
       <DetailHeader></DetailHeader>
       <DetailInfo :BaseInfo="item.baseInfo"></DetailInfo>
       <DetailTicket :TicketInfo="item.ticketInfo"></DetailTicket>
+      <DetailComment></DetailComment>
       <DetailFooter></DetailFooter>
     </div>
   </div>
@@ -18,6 +19,7 @@ import DetailBanner from './components/Banner'
 import DetailHeader from './components/Header'
 import DetailInfo from './components/BaseInfo'
 import DetailTicket from './components/Ticket'
+import DetailComment from './components/Comment'
 import DetailFooter from './components/Footer'
 export default {
   name: 'Detail',
@@ -26,6 +28,7 @@ export default {
     DetailHeader,
     DetailInfo,
     DetailTicket,
+    DetailComment,
     DetailFooter
   },
   data () {
@@ -40,9 +43,9 @@ export default {
         .then(this.getDetaiInfoSucc)
     },
     getDetaiInfoSucc (res) {
+      res = res.data
       //  动态路由参数
       const routeId = this.$route.params.id
-      res = res.data
       const allSight = res.data.allSight
       if (res.success && res.data) {
         //  筛选出对应路由的数据

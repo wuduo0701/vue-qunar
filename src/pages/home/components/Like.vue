@@ -26,6 +26,9 @@
         </div>
       </router-link>
     </ul>
+    <div class="like-more border-top" @click="showAllSight">
+      查看所有景点
+    </div>
   </div>
 </template>
 <script>
@@ -33,6 +36,11 @@ export default {
   name: 'HomeLike',
   props: {
     likeList: Array
+  },
+  methods: {
+    showAllSight () {
+      alert('数据正在完善中🧐')
+    }
   }
 }
 </script>
@@ -105,4 +113,11 @@ export default {
           right: .24rem
           bottom: 0
           ellipsis()
+  .like-more
+    display: block;
+    padding: .2rem 0;
+    color: #00afc7;
+    font-size: .28rem;
+    line-height: .4rem;
+    text-align: center;
 </style>
