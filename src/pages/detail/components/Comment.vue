@@ -2,37 +2,47 @@
   <div class="comment-wrapper border-bottom">
     <div class="comment-space"></div>
     <h3 class="comment-title">用户评论</h3>
-    <div class="comment-item border-top">
+    <div
+      class="comment-item border-top"
+      v-for="comment in CommentInfo"
+      :key="comment.id"
+    >
       <div class="item-data">
         <span class="star-level">
           <i class="star iconfont">&#xe870;&#xe870;&#xe870;&#xe870;&#xe870;</i>
         </span>
-        <span class="data">2020-05-02</span>
+        <span class="data">{{comment.commentData}}</span>
       </div>
-      <p class="comment-text">今天玩过山车碰到一个小姐姐，玩的时候一直掐着我，超后悔没有要微信，后面玩凤舞九天又碰到了我又没有是真的憨，难受了啊</p>
+      <p class="comment-text">{{comment.commentText}}</p>
       <div class="comment-img">
-        <div class="imgouter">
+        <div
+          class="imgouter"
+          v-for="(img, index) in comment.commentImg"
+          :key="index"
+        >
           <div class="imginner">
-            <img class="img" src="http://img1.qunarzz.com/piao/fusion/1903/87/cceaba729084f602.jpg_228x168_93feb3d4.jpg">
-          </div>
-        </div>
-        <div class="imgouter">
-          <div class="imginner">
-            <img class="img" src="http://img1.qunarzz.com/piao/fusion/1903/87/cceaba729084f602.jpg_228x168_93feb3d4.jpg">
-          </div>
-        </div>
-        <div class="imgouter">
-          <div class="imginner">
-            <img class="img" src="http://img1.qunarzz.com/piao/fusion/1903/87/cceaba729084f602.jpg_228x168_93feb3d4.jpg">
+            <img class="img" :src="img">
           </div>
         </div>
       </div>
+    </div>
+    <div class="more-comment border-top" @click="showMoreComment">
+      查看全部点评
+      <span class="iconfont">&#xe612;</span>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'DetailComment'
+  name: 'DetailComment',
+  props: {
+    CommentInfo: Array
+  },
+  methods: {
+    showMoreComment () {
+      alert('评论功能增在完善哦😘')
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -106,4 +116,12 @@ export default {
             margin-right: .07rem;
             .img
               width: 100%;
+    .more-comment
+      position: relative;
+      margin-top: -.02rem;
+      height: 1rem;
+      color: #616161;
+      line-height: 1rem;
+      text-align: center;
+      z-index: 2;
 </style>

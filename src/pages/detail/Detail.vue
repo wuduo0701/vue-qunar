@@ -8,7 +8,7 @@
       <DetailHeader></DetailHeader>
       <DetailInfo :BaseInfo="item.baseInfo"></DetailInfo>
       <DetailTicket :TicketInfo="item.ticketInfo"></DetailTicket>
-      <DetailComment></DetailComment>
+      <DetailComment :CommentInfo="item.commentInfo"></DetailComment>
       <DetailFooter></DetailFooter>
     </div>
   </div>
