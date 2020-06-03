@@ -20,7 +20,7 @@ import DetailHeader from './components/Header'
 import DetailInfo from './components/BaseInfo'
 import DetailTicket from './components/Ticket'
 import DetailComment from './components/Comment'
-import DetailFooter from './components/Footer'
+import DetailFooter from '../../common/footer/Footer'
 export default {
   name: 'Detail',
   components: {

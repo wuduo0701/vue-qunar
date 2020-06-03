@@ -6,6 +6,7 @@
     <HomeHotSight :hotWenkend="hotWenkend"></HomeHotSight>
     <HomeLike :likeList="likeList"></HomeLike>
     <HomeWeekends :weekendList="weekendList"></HomeWeekends>
+    <HomeFooter></HomeFooter>
   </div>
 </template>
 <script>
@@ -17,6 +18,7 @@ import HomeIcons from './components/Icons'
 import HomeHotSight from './components/HotSight'
 import HomeLike from './components/Like'
 import HomeWeekends from './components/Weekends'
+import HomeFooter from '../../common/footer/Footer'
 export default {
   name: 'Home',
   components: {
@@ -25,7 +27,8 @@ export default {
     HomeIcons,
     HomeHotSight,
     HomeLike,
-    HomeWeekends
+    HomeWeekends,
+    HomeFooter
   },
   data () {
     return {
