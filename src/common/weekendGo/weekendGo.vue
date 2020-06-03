@@ -6,17 +6,17 @@
         <div class="iconfont back">&#xe624;</div>
       </router-link>
     </div>
-    <div>
-      <div class="product">
+    <div v-for="item in product" :key="item.id">
+      <div class="product" @click="showDetial(item.id)">
         <div class="product-img">
-          <img src="http://img1.qunarzz.com/sight/p0/1609/94/945ab5b76758703a3.water.jpg_640x276_e4bd839e.jpg" alt="">
+          <img :src="item.img">
         </div>
         <div class="product-info">
-          <p class="product-name">滕王阁</p>
-          <p class="product-desc">“江南三大名楼”之首</p>
+          <p class="product-name">{{item.name}}</p>
+          <p class="product-desc">{{item.desc}}</p>
           <div class="product-price">
             <span class="price">￥
-              <em class="price-num">45</em>
+              <em class="price-num">{{item.price}}</em>
               <span class="price-start">起</span>
             </span>
           </div>
@@ -26,20 +26,43 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: 'weekendGo',
   data () {
     return {
-      productName: ''
+      productName: '',
+      product: []
     }
   },
   methods: {
     getproductName () {
       this.productName = this.$route.params.name
+    },
+    getWeekendInfo () {
+      axios.get('/api/weekendgo.json')
+        .then(this.getWeekendInfoInfoSucc)
+    },
+    getWeekendInfoInfoSucc (res) {
+      res = res.data
+      const wenkendGo = res.data.wenkendGo
+      if (res.success && res.data) {
+        const product = wenkendGo.filter(item => {
+          return item.name === this.productName
+        })
+        this.product = product[0].data
+      }
+    },
+    // 跳转到详情页
+    showDetial (id) {
+      this.$router.push({ path: `/detail/${id}` })
     }
   },
   activated  () {
     this.getproductName()
+  },
+  mounted () {
+    this.getWeekendInfo()
   }
 }
 </script>
