@@ -14,7 +14,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/weekendgo',
+      path: '/weekendgo/:name',
       name: 'WekendGo',
       component: WekendGo
     },

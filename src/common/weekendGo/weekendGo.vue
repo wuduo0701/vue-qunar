@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="header">
-      周末去哪儿
+      {{productName}}
       <router-link to="/">
         <div class="iconfont back">&#xe624;</div>
       </router-link>
@@ -27,7 +27,20 @@
 </template>
 <script>
 export default {
-  name: 'weekendGo'
+  name: 'weekendGo',
+  data () {
+    return {
+      productName: ''
+    }
+  },
+  methods: {
+    getproductName () {
+      this.productName = this.$route.params.name
+    }
+  },
+  activated  () {
+    this.getproductName()
+  }
 }
 </script>
 <style lang="stylus" scoped>

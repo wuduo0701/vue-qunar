@@ -2,7 +2,7 @@
   <div>
     <div class="weekend-title">周末去哪儿</div>
     <ul>
-      <li class="weekend-item" v-for="item in weekendList" :key="item.id">
+      <li class="weekend-item" v-for="item in weekendList" :key="item.id" @click="showWeekList(item.productName)">
         <div class="item-img-container">
           <img class="item-img" :src="item.imgUrl">
         </div>
@@ -27,6 +27,11 @@ export default {
   name: 'HomeWeekends',
   props: {
     weekendList: Array
+  },
+  methods: {
+    showWeekList (name) {
+      this.$router.push({ path: `/weekendgo/${name}` })
+    }
   }
 }
 </script>

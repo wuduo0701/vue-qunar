@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     showMoreComment () {
-      alert('评论功能增在完善哦😘')
+      alert('评论功能正在完善哦😘')
     }
   }
 }
