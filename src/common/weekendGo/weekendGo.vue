@@ -60,8 +60,6 @@ export default {
   },
   activated  () {
     this.getproductName()
-  },
-  mounted () {
     this.getWeekendInfo()
   }
 }
