@@ -7,14 +7,14 @@
 2. 项目只是用来对vue知识的学习总结，毕竟再好的知识还是要经过手动书写加以巩固
 
 - 遇到的问题
-原本使用fastClick.js解决移动端300ms延迟的时候，快速的点击页面，出现如下报错：
+1. 原本使用fastClick.js解决移动端300ms延迟的时候，快速的点击页面，出现如下报错：
 ```
   Unable to preventDefault inside passive event listener due to target being treated
 ```
 
-借助keep-alive的生命周期activated，判断切换的城市是否与上次一样
+2. 借助keep-alive的生命周期activated，判断切换的城市是否与上次一样
 一样则不发ajax请求。否则重新发ajax
 
 
-vue中keep-alive的exclude的存在会使activated生命周期函数失效
+3. vue中keep-alive的exclude的存在会使activated生命周期函数失效
 所有改为了mounted 和 beforeDestroy 生命周期
