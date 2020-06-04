@@ -3,7 +3,7 @@
     <div class="header-left">
       <div class="iconfont backicon">&#xe624;</div>
     </div>
-    <div class="header-input">
+    <div class="header-input" @click="showSight">
       <span class="iconfont">&#xe632;</span>
       搜索景点门票
     </div>
@@ -20,6 +20,11 @@ export default {
   name: 'Header',
   computed: {
     ...mapState(['city'])
+  },
+  methods: {
+    showSight () {
+      alert('由于景点数据不多，尚未开发此功能😐，可以看看城市选择的搜索功能')
+    }
   }
 }
 </script>

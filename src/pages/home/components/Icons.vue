@@ -2,7 +2,12 @@
   <div class="icons">
     <swiper ref="mySwiper" :options="swiperOptions">
       <swiper-slide v-for="(page, index) in pages" :key="index">
-        <div class="icon" v-for="item in page" :key="item.id">
+        <div
+          class="icon"
+          v-for="item in page"
+          :key="item.id"
+          @click="showIcon"
+        >
           <div class="iconImg">
             <img class="img-content" :src="item.iconImg">
           </div>
@@ -37,6 +42,11 @@ export default {
         pages[page].push(item)
       })
       return pages
+    }
+  },
+  methods: {
+    showIcon () {
+      alert('功能模块正在完善中')
     }
   }
 }
