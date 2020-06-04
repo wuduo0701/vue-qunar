@@ -1,23 +1,10 @@
 # vue-qunar vue去哪儿网项目
+声明：此项目只用于个人学习，不作为任何商业活动
 
-像素比：
-在html中(reset.css)
-1 rem = 50 px
-- 创建分支，同步
-1. git checkout -b 分支名       创建并切换到该分支
+## 技术栈 vue + vuex + vue-router + swiper + fastclick + stylus
 
-2. git push origin 分支名     远端同步分支
-
-- 上传到分支上后切换为主分支
-1. git  checkout master
-  同步代码
-2. git pull origin master
-  合并分支
-3. git  merge dev
-  查看状态
-4. git status
-  push到远端
-5. git push origin master
+1. 此项目涉及数据十分庞大，目前我只开发了前台，后台是自己一点点mock的，所以只有南昌的部分景点数据。
+2. 项目只是用来对vue知识的学习总结，毕竟再好的知识还是要经过手动书写加以巩固
 
 - 遇到的问题
 原本使用fastClick.js解决移动端300ms延迟的时候，快速的点击页面，出现如下报错：
