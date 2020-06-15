@@ -6,7 +6,7 @@
       :key="item"
       :ref="item"
       @click="switchCity"
-      @touchstart="touchStart"
+      @touchstart.prevent="touchStart"
       @touchmove="touchMove"
       @touchend="touchEnd"
     >
@@ -50,7 +50,7 @@ export default {
           if (index >= 0 && index < this.letters.length) {
             this.$emit('changeCity', this.letters[index])
           }
-        }, 16)
+        }, 8)
       }
     },
     touchEnd () {

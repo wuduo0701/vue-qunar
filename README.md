@@ -11,7 +11,8 @@
 ```
   Unable to preventDefault inside passive event listener due to target being treated
 ```
-
+解决办法：
+  在touchstart事件上，加一个阻止默认行为
 2. 借助keep-alive的生命周期activated，判断切换的城市是否与上次一样
 一样则不发ajax请求。否则重新发ajax
 
