@@ -50,7 +50,11 @@ export default {
   methods: {
     handleClick (name) {
       this.activeName = name
-      this.$router.push({ path: 'myInfo' })
+      if (name === 'order') {
+        this.$router.push({ path: 'myInfo' })
+      } else if (name === 'myInfo') {
+        this.$router.push({ path: '/myInfo' })
+      }
     }
   }
 }

@@ -1,12 +1,14 @@
 <template>
   <div class="MyInfo">
     <div class="header">
-      <div class="iconfont back-icon">&#xe624;</div>
+      <i class="iconfont back-icon" @click="backHome">&#xe624;</i>
       <img src="https://s.qunarzz.com/usercenter_mobile/images/my/mybgnew-20161111.jpg" class="backImg" alt="背景">
       <div class="info-content">
         <div class="avator-container">
-          <img src="https://source.qunarzz.com/usercenter/touch/avatar.png" class="avator" alt="头像">
-          <span class="unLogin">登录/注册</span>
+          <router-link to="/login">
+            <img src="https://source.qunarzz.com/usercenter/touch/avatar.png" class="avator" alt="头像">
+            <span class="unLogin">登录/注册</span>
+          </router-link>
         </div>
       </div>
     </div>
@@ -72,7 +74,13 @@
 
 <script>
 export default {
-  name: 'MyInfo'
+  name: 'MyInfo',
+
+  methods: {
+    backHome () {
+      this.$router.push({ path: '/' })
+    }
+  }
 }
 </script>
 

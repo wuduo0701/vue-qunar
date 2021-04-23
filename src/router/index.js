@@ -5,6 +5,8 @@ import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail'
 import WekendGo from '@/common/weekendGo/weekendGo'
 import MyInfo from '@/pages/myInfo/myInfo.vue'
+import Login from '@/pages/login/login.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -35,6 +37,12 @@ export default new Router({
       path: '/myInfo',
       name: 'myInfo',
       component: MyInfo
+    },
+    // 登录
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ],
   // 滚动行为
