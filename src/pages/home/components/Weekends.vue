@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-bottom: 50px">
     <div class="weekend-title">周末去哪儿</div>
     <ul>
       <li class="weekend-item" v-for="item in weekendList" :key="item.id" @click="showWeekList(item.productName)">
@@ -7,8 +7,8 @@
           <img class="item-img" :src="item.imgUrl">
         </div>
         <div class="item-info">
-          <p class="item-name">{{item.productName}}</p>
-          <p class="item-desc">{{item.productDesc}}</p>
+          <p class="item-name">{{item.desc}}</p>
+          <p class="item-desc">{{item.title}}</p>
         </div>
       </li>
     </ul>

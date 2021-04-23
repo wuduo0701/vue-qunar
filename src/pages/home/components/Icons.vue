@@ -9,9 +9,9 @@
           @click="showIcon"
         >
           <div class="iconImg">
-            <img class="img-content" :src="item.iconImg">
+            <img class="img-content" :src="item.imgUrl">
           </div>
-          <p class="icon-desc">{{item.iconTitle}}</p>
+          <p class="icon-desc">{{item.desc}}</p>
         </div>
       </swiper-slide>
     </swiper>
@@ -28,13 +28,13 @@ export default {
     }
   },
   props: {
-    IconList: Array
+    iconList: Array
   },
   computed: {
     // 分页
     pages () {
       const pages = []
-      this.IconList.forEach((item, index) => {
+      this.iconList.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []

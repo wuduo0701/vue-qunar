@@ -4,10 +4,12 @@ import Home from '@/pages/home/Home'
 import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail'
 import WekendGo from '@/common/weekendGo/weekendGo'
+import MyInfo from '@/pages/myInfo/myInfo.vue'
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    // 首页
     {
       path: '/',
       name: 'Home',
@@ -27,6 +29,12 @@ export default new Router({
       path: '/detail/:id',
       name: 'Detail',
       component: Detail
+    },
+    // 我的
+    {
+      path: '/myInfo',
+      name: 'myInfo',
+      component: MyInfo
     }
   ],
   // 滚动行为

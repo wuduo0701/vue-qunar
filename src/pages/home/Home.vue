@@ -1,12 +1,19 @@
 <template>
   <div>
     <HomeHeader></HomeHeader>
+    <!-- swpier -->
     <HomeSwiper :swiperList="swiperList"></HomeSwiper>
-    <HomeIcons :IconList="IconList"></HomeIcons>
+    <!-- 图标组 -->
+    <HomeIcons :iconList="iconList"></HomeIcons>
+    <!-- 本周热门 -->
     <HomeHotSight :hotWenkend="hotWenkend"></HomeHotSight>
+    <!-- 猜你喜欢 -->
     <HomeLike :likeList="likeList"></HomeLike>
+    <!-- 周末去哪儿 -->
     <HomeWeekends :weekendList="weekendList"></HomeWeekends>
-    <HomeFooter></HomeFooter>
+    <!-- 页脚 -->
+    <!-- <HomeFooter></HomeFooter> -->
+    <HomeFooterBar></HomeFooterBar>
   </div>
 </template>
 <script>
@@ -19,6 +26,8 @@ import HomeHotSight from './components/HotSight'
 import HomeLike from './components/Like'
 import HomeWeekends from './components/Weekends'
 import HomeFooter from '../../common/footer/Footer'
+import HomeFooterBar from '../../common/footerBar/footerBar'
+
 export default {
   name: 'Home',
   components: {
@@ -28,7 +37,8 @@ export default {
     HomeHotSight,
     HomeLike,
     HomeWeekends,
-    HomeFooter
+    HomeFooter,
+    HomeFooterBar
   },
   data () {
     return {
@@ -36,7 +46,8 @@ export default {
       // 轮播图
       swiperList: [],
       // 首页icon
-      IconList: [],
+      // IconList: [],
+      iconList: [],
       // 猜你喜欢
       likeList: [],
       // 周末去哪儿
@@ -50,16 +61,19 @@ export default {
   },
   methods: {
     getHomeInfo () {
-      axios.get('/api/home.json?city=' + this.city)
+      // axios.get('/api/home.json?city=' + this.city)
+      axios.get('/api/index.json')
         .then(this.getHomeInfoSucc)
     },
     // axios传值
     getHomeInfoSucc (res) {
       res = res.data
       if (res.success && res.data) {
+        console.log(res.data)
         const data = res.data
         this.swiperList = data.swiperList
-        this.IconList = data.IconList
+        this.iconList = data.iconList
+        // this.IconList = data.IconList
         this.likeList = data.likeList
         this.weekendList = data.weekendList
         this.hotWenkend = data.hotList

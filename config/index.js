@@ -12,10 +12,9 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://api.duowu.site',
-        changeOrigin: true, 
+        target: 'http://localhost:8080',
         pathRewrite: {
-          '^/api': '/mock'
+          '^/api': '/static/mock'
         }
       }
     },
