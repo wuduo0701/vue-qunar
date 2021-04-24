@@ -6,6 +6,7 @@ import Detail from '@/pages/detail/Detail'
 import WekendGo from '@/common/weekendGo/weekendGo'
 import MyInfo from '@/pages/myInfo/myInfo.vue'
 import Login from '@/pages/login/login.vue'
+import Register from '@/pages/register/register.vue'
 
 Vue.use(Router)
 
@@ -43,6 +44,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
   ],
   // 滚动行为

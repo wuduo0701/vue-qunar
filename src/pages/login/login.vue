@@ -5,14 +5,27 @@
       <router-link to="/myInfo">
         <div class="iconfont back">&#xe624;</div>
       </router-link>
-      <router-link to="/regist">
+      <router-link to="/register">
         <div class="regist">注册</div>
       </router-link>
     </div>
     <div class="container">
       <van-cell-group>
-        <van-field v-model="user" label="账户" placeholder="请输入账户" />
-        <van-field v-model="password" label="密码" type="password" placeholder="请输入密码" />
+        <van-field
+          v-model="user"
+          :maxlength="maxlength"
+          label="账户"
+          placeholder="请输入账户"
+          required
+        />
+        <van-field
+          v-model="password"
+          label="密码"
+          :maxlength="maxlength"
+          type="password"
+          placeholder="请输入密码"
+          required
+        />
       </van-cell-group>
       <div class="login_box">
         <van-button
@@ -21,7 +34,7 @@
           class="login_btn"
           disabled
         >登录</van-button>
-        <van-button v-else type="primary" class="login_btn">登录</van-button>
+        <van-button v-else type="primary" class="login_btn" @click="login">登录</van-button>
       </div>
       <div class="retrieve">找回密码</div>
       <div class="tip"></div>
@@ -30,6 +43,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { Toast } from 'vant'
+
 export default {
   name: 'Login',
 
@@ -37,6 +53,7 @@ export default {
     return {
       user: '',
       password: '',
+      maxlength: 18,
       disabled: true
     }
   },
@@ -58,11 +75,25 @@ export default {
 
   methods: {
     isDisable () {
-      if (this.user !== '' && this.password !== '' & this.password.length >= 5) {
+      if (this.user !== '' && this.password !== '' && this.password.length >= 5) {
         this.disabled = false
       } else {
         this.disabled = true
       }
+    },
+    login () {
+      const query = {
+        user: this.user,
+        password: this.password
+      }
+      axios
+        .post('http://127.0.0.1:7001/user/login', query)
+        .then(() => {
+          Toast.success('登录成功')
+        })
+        .catch(() => {
+          Toast.success('失败')
+        })
     }
   }
 }
