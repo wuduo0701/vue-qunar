@@ -2,7 +2,7 @@
   <div class="register">
     <div class="header">
       <div>注册</div>
-      <router-link to="/login">
+      <router-link to="/user/login">
         <div class="iconfont back">&#xe624;</div>
       </router-link>
     </div>
@@ -49,6 +49,7 @@
 
 <script>
 import axios from 'axios'
+import { Toast } from 'vant'
 
 export default {
   name: 'Register',
@@ -120,10 +121,15 @@ export default {
       axios
         .post('http://127.0.0.1:7001/user/register', query)
         .then((res) => {
-          console.log(res)
+          const satus = res.data.status
+          if (satus === 'success') {
+            Toast.success('注册成功')
+          } else if (satus === 'existed') {
+            Toast.fail('用户已经存在')
+          }
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
+          Toast.fail('注册失败')
         })
     }
   }

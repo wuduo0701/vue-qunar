@@ -2,10 +2,10 @@
   <div class="login">
     <div class="header">
       <div>登录</div>
-      <router-link to="/myInfo">
+      <router-link to="/user">
         <div class="iconfont back">&#xe624;</div>
       </router-link>
-      <router-link to="/register">
+      <router-link to="/user/register">
         <div class="regist">注册</div>
       </router-link>
     </div>
@@ -36,7 +36,7 @@
         >登录</van-button>
         <van-button v-else type="primary" class="login_btn" @click="login">登录</van-button>
       </div>
-      <div class="retrieve">找回密码</div>
+      <div class="retrieve" @click="retrieve">找回密码</div>
       <div class="tip"></div>
     </div>
   </div>
@@ -88,12 +88,19 @@ export default {
       }
       axios
         .post('http://127.0.0.1:7001/user/login', query)
-        .then(() => {
-          Toast.success('登录成功')
+        .then((res) => {
+          const status = res.data.status
+          if (status === 'success') {
+            Toast.success('登录成功')
+          }
         })
         .catch(() => {
-          Toast.success('失败')
+          Toast.fail('登录失败')
         })
+    },
+    // 找回密码
+    retrieve () {
+      this.$router.push({ path: '/user/retrieve' })
     }
   }
 }

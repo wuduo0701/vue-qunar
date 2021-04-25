@@ -5,7 +5,7 @@
       <img src="https://s.qunarzz.com/usercenter_mobile/images/my/mybgnew-20161111.jpg" class="backImg" alt="背景">
       <div class="info-content">
         <div class="avator-container">
-          <router-link to="/login">
+          <router-link to="/user/login">
             <img src="https://source.qunarzz.com/usercenter/touch/avatar.png" class="avator" alt="头像">
             <span class="unLogin">登录/注册</span>
           </router-link>
@@ -21,7 +21,7 @@
       </div>
       <div class="list_money">
         <div class="balance flex_cell">
-          <label class="number">2.00</label>
+          <label class="number">0.00</label>
           <label class="name">账户余额</label>
         </div>
         <div class="coupon flex_cell">

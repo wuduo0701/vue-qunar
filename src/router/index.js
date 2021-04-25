@@ -5,7 +5,9 @@ import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail'
 import WekendGo from '@/common/weekendGo/weekendGo'
 import MyInfo from '@/pages/myInfo/myInfo.vue'
+// 登录注册
 import Login from '@/pages/login/login.vue'
+import Retrieve from '@/pages/login/retrieve.vue'
 import Register from '@/pages/register/register.vue'
 
 Vue.use(Router)
@@ -35,18 +37,23 @@ export default new Router({
     },
     // 我的
     {
-      path: '/myInfo',
+      path: '/user',
       name: 'myInfo',
       component: MyInfo
     },
     // 登录
     {
-      path: '/login',
+      path: '/user/login',
       name: 'Login',
       component: Login
     },
     {
-      path: '/register',
+      path: '/user/retrieve',
+      name: 'Retrieve',
+      component: Retrieve
+    },
+    {
+      path: '/user/register',
       name: 'Register',
       component: Register
     }
