@@ -5,10 +5,14 @@
       <img src="https://s.qunarzz.com/usercenter_mobile/images/my/mybgnew-20161111.jpg" class="backImg" alt="背景">
       <div class="info-content">
         <div class="avator-container">
-          <router-link to="/user/login">
+          <router-link to="/user/login" v-if="!user.length">
             <img src="https://source.qunarzz.com/usercenter/touch/avatar.png" class="avator" alt="头像">
             <span class="unLogin">登录/注册</span>
           </router-link>
+          <div v-else>
+            <img src="https://source.qunarzz.com/usercenter/touch/avatar.png" class="avator" alt="头像">
+            <span class="unLogin">{{ userInfo.nickName }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -73,12 +77,39 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'MyInfo',
+
+  data () {
+    return {
+      user: '',
+      userInfo: ''
+    }
+  },
+
+  created () {
+    this.user = localStorage.user
+    // eslint-disable-next-line no-unused-expressions
+    this.user ? this.getUser() : ''
+  },
 
   methods: {
     backHome () {
       this.$router.push({ path: '/' })
+    },
+    getUser () {
+      const query = {
+        user: this.user
+      }
+      axios
+        .get(`/v1/user/${this.user}`, query)
+        .then((res) => {
+          if (res) {
+            this.userInfo = res.data.data
+          }
+        })
     }
   }
 }

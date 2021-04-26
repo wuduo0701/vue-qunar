@@ -36,12 +36,11 @@
       </van-cell-group>
       <div class="login_box">
         <van-button
-          v-if="disabled"
           type="primary"
           class="login_btn"
-          disabled
+          :disabled="disabled"
+          @click="register"
         >注册</van-button>
-        <van-button v-else type="primary" class="login_btn" @click="register">注册</van-button>
       </div>
     </div>
   </div>
@@ -113,17 +112,20 @@ export default {
       }
     },
     register () {
+      const nickName = `${this.user}${Math.floor(Math.random() * 8999) + 1000}`
       const query = {
         user: this.user,
         password: this.password,
-        repassword: this.passwordCopy
+        repassword: this.passwordCopy,
+        nickName: nickName
       }
       axios
-        .post('http://127.0.0.1:7001/user/register', query)
+        .post('/v1/user/register', query)
         .then((res) => {
           const satus = res.data.status
           if (satus === 'success') {
             Toast.success('注册成功')
+            this.$router.push({ path: '/user/login' })
           } else if (satus === 'existed') {
             Toast.fail('用户已经存在')
           }

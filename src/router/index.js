@@ -11,8 +11,7 @@ import Retrieve from '@/pages/login/retrieve.vue'
 import Register from '@/pages/register/register.vue'
 
 Vue.use(Router)
-
-export default new Router({
+const router = new Router({
   routes: [
     // 首页
     {
@@ -63,3 +62,12 @@ export default new Router({
     return { x: 0, y: 0 }
   }
 })
+// 判断用户是否登录
+router.beforeEach((to, from, next) => {
+  const cookie = document.cookie
+  if (to.name !== 'Login' && cookie === '') {
+    next({ replace: true, name: 'Login' })
+  }
+  next()
+})
+export default router

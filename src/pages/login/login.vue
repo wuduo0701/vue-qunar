@@ -43,11 +43,18 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 import axios from 'axios'
 import { Toast } from 'vant'
 
 export default {
   name: 'Login',
+
+  computed: {
+    ...mapState({
+      loginUser: 'loginUser'
+    })
+  },
 
   data () {
     return {
@@ -74,6 +81,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['changeLoginUser']),
     isDisable () {
       if (this.user !== '' && this.password !== '' && this.password.length >= 5) {
         this.disabled = false
@@ -87,11 +95,17 @@ export default {
         password: this.password
       }
       axios
-        .post('http://127.0.0.1:7001/user/login', query)
+        .post('/v1/user/login', query)
         .then((res) => {
           const status = res.data.status
           if (status === 'success') {
+            this.changeLoginUser(this.user)
+            // 设置过期时间
+            const time = new Date(new Date().getTime() + 1000 * 60 * 60 * 24)
+            // 设置cookie
+            document.cookie = `userId=${this.user};expires=${time}`
             Toast.success('登录成功')
+            this.$router.push({ path: '/user' })
           }
         })
         .catch(() => {
