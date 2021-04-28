@@ -7,7 +7,7 @@
           <img class="item-img" :src="item.imgUrl">
         </div>
         <div class="item-info">
-          <p class="item-name">{{item.desc}}</p>
+          <p class="item-name">{{item.info}}</p>
           <p class="item-desc">{{item.title}}</p>
         </div>
       </li>

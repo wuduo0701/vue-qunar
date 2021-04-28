@@ -9,6 +9,8 @@ import MyInfo from '@/pages/myInfo/myInfo.vue'
 import Login from '@/pages/login/login.vue'
 import Retrieve from '@/pages/login/retrieve.vue'
 import Register from '@/pages/register/register.vue'
+//  订单模块
+import Order from '@/pages/order/order.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -55,6 +57,11 @@ const router = new Router({
       path: '/user/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/order',
+      name: 'Order',
+      component: Order
     }
   ],
   // 滚动行为

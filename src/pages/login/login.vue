@@ -2,7 +2,7 @@
   <div class="login">
     <div class="header">
       <div>登录</div>
-      <router-link to="/user">
+      <router-link to="/">
         <div class="iconfont back">&#xe624;</div>
       </router-link>
       <router-link to="/user/register">

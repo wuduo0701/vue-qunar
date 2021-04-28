@@ -13,17 +13,17 @@
       <li
         class="host-list-item"
         v-for="item in hotWenkend"
-        :key="item.id"
-        @click="changerouter(item.id)"
+        :key="item.name"
+        @click="changerouter(item.name)"
       >
         <div class="item-link">
           <div class="item-tag">
             <img class="item-tag-img" :src="item.hotTag">
           </div>
           <div class="item-wrapper">
-            <img :src="item.hotimg">
+            <img :src="item.imgUrl">
           </div>
-          <div class="item-sight">{{item.hotName}}</div>
+          <div class="item-sight">{{item.name}}</div>
           <div class="item-price">
             <span class="price">￥
               <em class="price-num">
@@ -50,6 +50,16 @@ export default {
     //  路由跳转
     changerouter (id) {
       this.$router.push({ path: `/detail/${id}` })
+    },
+    mapLevel (level) {
+      if (level === 1) {
+        return 'level1.png'
+      } else if (level === 2) {
+        return 'level2.png'
+      } else if (level === 3) {
+        return 'level3.png'
+      }
+      return ''
     }
   }
 }

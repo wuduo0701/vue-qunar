@@ -61,9 +61,30 @@ export default {
   },
   methods: {
     getHomeInfo () {
-      // axios.get('/api/home.json?city=' + this.city)
-      axios.get('/api/index.json')
+      axios
+        .get('/api/index.json')
         .then(this.getHomeInfoSucc)
+      axios
+        .get('/v1/homePage', {
+          params: {
+            city: localStorage.city
+          }
+        })
+        .then(res => {
+          res = res.data
+          if (res.status === 'success') {
+            this.getInfo(res.data)
+          }
+        })
+    },
+    getInfo (res) {
+      if (res) {
+        this.swiperList = res.swiperList
+        this.weekendList = res.weekendList
+        this.iconList = res.iconList
+        this.hotWenkend = res.hotWeekend
+        this.likeList = res.likeList
+      }
     },
     // axios传值
     getHomeInfoSucc (res) {
@@ -71,11 +92,11 @@ export default {
       if (res.success && res.data) {
         console.log(res.data)
         const data = res.data
-        this.swiperList = data.swiperList
+        // this.swiperList = data.swiperList
         this.iconList = data.iconList
         // this.IconList = data.IconList
         this.likeList = data.likeList
-        this.weekendList = data.weekendList
+        // this.weekendList = data.weekendList
         this.hotWenkend = data.hotList
       }
     }

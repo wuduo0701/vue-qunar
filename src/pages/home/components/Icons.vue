@@ -5,13 +5,13 @@
         <div
           class="icon"
           v-for="item in page"
-          :key="item.id"
+          :key="item.title"
           @click="showIcon"
         >
           <div class="iconImg">
             <img class="img-content" :src="item.imgUrl">
           </div>
-          <p class="icon-desc">{{item.desc}}</p>
+          <p class="icon-desc">{{item.title}}</p>
         </div>
       </swiper-slide>
     </swiper>

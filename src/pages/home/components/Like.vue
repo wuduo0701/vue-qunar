@@ -10,15 +10,15 @@
         tag="li"
         class="item border-bottom"
         v-for="item in likeList"
-        :key="item.id"
-        :to="'/detail/' + item.id"
+        :key="item.name"
+        :to="'/detail/' + item.name"
       >
         <div class="item-img-container">
           <img :src="item.imgUrl" class="item-img">
         </div>
         <div class="item-info">
-          <p class="item-title">{{item.title}}</p>
-          <p class="item-desc">{{item.desc}}</p>
+          <p class="item-title">{{item.name}}</p>
+          <p class="item-desc">{{item.info}}</p>
         </div>
         <div class="item-price-container">
           <span class="item-price">￥{{item.price}}</span>起
