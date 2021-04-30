@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="banner" @click="showGallery">
-      <img class="banner-img" :src="BannerInfo.bannerImg">
+      <img class="banner-img" :src="bannerInfo.img">
       <div class="banner-info">
-        <div class="banner-info-title">{{BannerInfo.sightName}}</div>
+        <div class="banner-info-title">{{ bannerInfo.name }}</div>
         <div class="banner-info-number">
           <span class="iconfont banner-icon">&#xe63d;</span>
-          {{BannerInfo.gallaryImgNum}}
+          {{bannerInfo.galleryImgs.length}}
         </div>
       </div>
     </div>
     <Gallery
-      :imgUrl="BannerInfo.gallaryImgs"
+      :imgUrl="bannerInfo.galleryImgs"
       v-show="isShowGallery"
       @closeGallery="closeGallery"
     >
@@ -28,7 +28,7 @@ export default {
     }
   },
   props: {
-    BannerInfo: Object
+    bannerInfo: Object
   },
   components: {
     Gallery

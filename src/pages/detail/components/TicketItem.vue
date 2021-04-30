@@ -3,18 +3,18 @@
     <div class="ticket-item flex-box border-top">
       <div class="ticket-item-main flexbox-layout">
         <div>
-          <h6 class="tickey-title">{{ticketItem.itemTitle}}</h6>
+          <h6 class="tickey-title">{{ticketItem.sight_title}}</h6>
           <ul class="ticket-light">
             <span class="ticket-desctag">
               <img class="ticket-desctag-icon" src="https://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20202/ea3f321aea9fbf93098a78bdddd3306f.png">
-              {{ticketItem.itemTime}}
+              {{timeFormat(ticketItem.sight_time)}}
             </span>
           </ul>
           <ul class="ticket-retreat">
             <span class="ticket-label border">条件退</span>
           </ul>
           <div class="ticket-supplier">
-            <span>{{ticketItem.itemInfo}}</span>
+            <span>{{ticketItem.sight_info}}</span>
             <span class="ticket-info border-left">
               预定须知
               <span class="ticket-icon iconfont">&#xe68c;</span>
@@ -26,7 +26,7 @@
         <div class="ticket-item-link">
           <strong class="ticket-sale">
             ￥
-            <em class="sale-num">{{ticketItem.itemPrice}}</em>
+            <em class="sale-num">{{ticketItem.price}}</em>
           </strong>
           <em class="ticket-item-Btn" @click="reserveNow">立即预定</em>
         </div>
@@ -43,6 +43,11 @@ export default {
   methods: {
     reserveNow () {
       alert('预定成功啦😊')
+    },
+    timeFormat (date) {
+      let d = new Date(date)
+      let formatdatetime = (d.getMonth() + 1) + '月' + d.getDate() + '日'
+      return formatdatetime
     }
   }
 }

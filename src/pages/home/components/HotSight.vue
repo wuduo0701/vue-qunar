@@ -14,7 +14,7 @@
         class="host-list-item"
         v-for="item in hotWenkend"
         :key="item.name"
-        @click="changerouter(item.name)"
+        @click="changeRouter(item.name)"
       >
         <div class="item-link">
           <div class="item-tag">
@@ -48,8 +48,8 @@ export default {
       alert('页面还在完善中...😵')
     },
     //  路由跳转
-    changerouter (id) {
-      this.$router.push({ path: `/detail/${id}` })
+    changeRouter (name) {
+      this.$router.push({ path: `/detail/name/${name}` })
     },
     mapLevel (level) {
       if (level === 1) {

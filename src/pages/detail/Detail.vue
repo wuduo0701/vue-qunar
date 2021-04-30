@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div
+    <!-- <div
       v-for="item in allSight"
       :key="item.id"
-    >
-      <DetailBanner :BannerInfo="item.BannerInfo"></DetailBanner>
-      <DetailHeader></DetailHeader>
-      <DetailInfo :BaseInfo="item.baseInfo"></DetailInfo>
-      <DetailTicket :TicketInfo="item.ticketInfo"></DetailTicket>
-      <DetailComment :CommentInfo="item.commentInfo"></DetailComment>
-      <DetailFooter></DetailFooter>
-    </div>
+    > -->
+    <DetailBanner :bannerInfo="bannerInfo"></DetailBanner>
+    <DetailHeader></DetailHeader>
+    <DetailInfo :baseInfo="baseInfo"></DetailInfo>
+    <DetailTicket :ticketInfo="ticketInfo"></DetailTicket>
+    <!-- <DetailComment :CommentInfo="item.commentInfo"></DetailComment> -->
+    <!-- <DetailFooter></DetailFooter> -->
+    <!-- </div> -->
   </div>
 </template>
 <script>
@@ -33,14 +33,42 @@ export default {
   },
   data () {
     return {
+      name: '',
+      bannerInfo: {
+        name: '',
+        img: '',
+        galleryImgs: []
+      },
+      baseInfo: {},
+      ticketInfo: {},
       //  景点信息
       allSight: []
     }
   },
   methods: {
     getDetailInfo () {
-      axios.get('/api/detail.json')
-        .then(this.getDetaiInfoSucc)
+      // axios.get('/api/detail.json')
+      //   .then(this.getDetaiInfoSucc)
+      axios
+        .get('/v1/detail', {
+          params: {
+            city: localStorage.city,
+            name: this.name
+          }
+        })
+        .then(res => {
+          res = res.data
+          if (res.status === 'success') {
+            this.getInfoSucc(res.data)
+          }
+        })
+    },
+    getInfoSucc (res) {
+      if (res) {
+        this.handleBanner(res.bannerImg)
+        this.baseInfo = res.baseInfo
+        this.handleTicket(res.ticketInfo)
+      }
     },
     getDetaiInfoSucc (res) {
       res = res.data
@@ -54,9 +82,32 @@ export default {
         })
         this.allSight = sightNow
       }
+    },
+    handleBanner (banner) {
+      this.bannerInfo.name = this.name
+      this.bannerInfo.img = banner[0].imgUrl
+      this.bannerInfo.galleryImgs = banner
+    },
+    // 处理票
+    handleTicket (info) {
+      Object.keys(info).forEach(item => {
+        let obj1 = {}
+        info[item].forEach(u => {
+          if (Object.keys(obj1).indexOf(u.kind) === -1) {
+            obj1[u.kind] = []
+          }
+          obj1[u.kind].push(u)
+        })
+        info[item] = {}
+        Object.assign(info[item], obj1)
+        // info[item].push(obj1)
+      })
+      this.ticketInfo = info
+      console.log(info)
     }
   },
   mounted () {
+    this.name = this.$route.params.name
     this.getDetailInfo()
   }
 }

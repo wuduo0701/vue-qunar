@@ -62,9 +62,6 @@ export default {
   methods: {
     getHomeInfo () {
       axios
-        .get('/api/index.json')
-        .then(this.getHomeInfoSucc)
-      axios
         .get('/v1/homePage', {
           params: {
             city: localStorage.city
@@ -73,31 +70,18 @@ export default {
         .then(res => {
           res = res.data
           if (res.status === 'success') {
-            this.getInfo(res.data)
+            this.getInfoSucc(res.data)
           }
         })
     },
-    getInfo (res) {
+    // axios传值
+    getInfoSucc (res) {
       if (res) {
         this.swiperList = res.swiperList
         this.weekendList = res.weekendList
         this.iconList = res.iconList
         this.hotWenkend = res.hotWeekend
         this.likeList = res.likeList
-      }
-    },
-    // axios传值
-    getHomeInfoSucc (res) {
-      res = res.data
-      if (res.success && res.data) {
-        console.log(res.data)
-        const data = res.data
-        // this.swiperList = data.swiperList
-        this.iconList = data.iconList
-        // this.IconList = data.IconList
-        this.likeList = data.likeList
-        // this.weekendList = data.weekendList
-        this.hotWenkend = data.hotList
       }
     }
   },

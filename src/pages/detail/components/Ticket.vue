@@ -2,33 +2,33 @@
   <div class="ticket-shelf">
     <div class="ticket-continer">
       <h3 class="ticket-title">景区门票</h3>
-      <div v-for="item in TicketInfo" :key="item.id">
+      <div v-for="(item) in Object.keys(ticketInfo)" :key="item">
         <p class="ticket-shelf-name">
           <span class="ticket-shelf-border"></span>
-          <span>{{item.ticketTitle}}</span>
+          <span>{{item}}</span>
         </p>
         <div class="ticket-type-list">
           <div class="ticket-group border-bottom">
             <div class="ticket-list-continer border">
               <div
-                v-for="(ticket) in item.ticketType"
-                :key="ticket.id"
+                v-for="(ticket, index) in Object.keys(ticketInfo[item])"
+                :key="ticket"
               >
                 <div class="ticket-list border-top" >
-                  <div class="ticket-type-info" @click="changeShowItem(ticket.id)">
-                    <h5 class="ticket-type-name">{{ticket.type}}</h5>
+                  <div class="ticket-type-info" @click="changeShowItem(index)">
+                    <h5 class="ticket-type-name">{{ticket}}</h5>
                     <div class="ticket-type-price">
                       <span class="price-money">￥</span>
-                      <em class="price-num">{{ticket.price}}</em>
+                      <em class="price-num">{{minPrice(ticketInfo[item][ticket])}}</em>
                       <span class="price-numword">起</span>
                     </div>
                     <div class="ticket-type-icon iconfont">&#xe63e;</div>
                   </div>
                   <div
-                    v-for="ticketItem in ticket.ticketItem"
-                    :key="ticketItem.id"
+                    v-for="(ticketItem, index) in ticketInfo[item][ticket]"
+                    :key="index"
                   >
-                    <TicketItem :ticketItem="ticketItem" v-show="switchItem(ticketItem.key)"></TicketItem>
+                    <TicketItem :ticketItem="ticketItem" v-show="switchItem(ticketItem.kind)"></TicketItem>
                   </div>
                 </div>
               </div>
@@ -53,7 +53,7 @@ export default {
     }
   },
   props: {
-    TicketInfo: Array
+    ticketInfo: Object
   },
   methods: {
     //  门票是否展开
@@ -66,6 +66,13 @@ export default {
     },
     switchItem (id) {
       return id === this.Itemindex
+    },
+    minPrice (arr) {
+      let min = 0
+      Math.min.apply(Math, arr.map(o => {
+        min = o.price
+      }))
+      return min
     }
   }
 }

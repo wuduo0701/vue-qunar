@@ -3,13 +3,13 @@
     <div class="flexbox flex-card">
       <div class="flexbox-item">
         <div>
-          <span class="comment-card-score">{{BaseInfo.score}}</span>
+          <span class="comment-card-score">{{baseInfo.score}}</span>
           <span class="comment-card-text">分</span>
-          <span class="comment-card-desc">{{BaseInfo.feel}}</span>
+          <span class="comment-card-desc">{{feelMap(baseInfo.score)}}</span>
         </div>
         <div>
-          <span class="comment-num">{{BaseInfo.commentNum}}条评论</span>
-          <span class="comment-num">{{BaseInfo.Introduction}}条攻略</span>
+          <span class="comment-num">{{baseInfo.commentNum}}条评论</span>
+          <span class="comment-num">{{baseInfo.raidersNum}}条攻略</span>
           <span class="iconfont right-arrow">&#xe68c;</span>
         </div>
       </div>
@@ -26,7 +26,7 @@
     <div class="baseinfo-address border-top">
       <p class="baseinfo-address-text">
         <span class="iconfont baseinfo-address-icon">&#xe60f;</span>
-        {{BaseInfo.address}}
+        {{baseInfo.address}}
         <span class="iconfont baseinfo-address-arrow">&#xe68c;</span>
       </p>
     </div>
@@ -36,7 +36,23 @@
 export default {
   name: 'DetailInfo',
   props: {
-    BaseInfo: Object
+    baseInfo: Object
+  },
+  methods: {
+    feelMap (score) {
+      if (score > 4) {
+        return '超赞'
+      } else if (score > 3) {
+        return '赞'
+      } else if (score > 2) {
+        return '普通'
+      } else if (score > 1) {
+        return '不喜欢'
+      } else if (score > 0) {
+        return '讨厌'
+      }
+      return '暂无'
+    }
   }
 }
 </script>
