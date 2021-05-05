@@ -51,6 +51,7 @@ export default {
     padding-bottom 55%
     .banner-img
       width 100%
+      height 4.03rem
     .banner-info
       display flex
       position absolute

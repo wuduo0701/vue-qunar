@@ -4,20 +4,21 @@
     <h3 class="comment-title">用户评论</h3>
     <div
       class="comment-item border-top"
-      v-for="comment in CommentInfo"
+      v-for="comment in commentInfo"
       :key="comment.id"
     >
       <div class="item-data">
         <span class="star-level">
           <i class="star iconfont">&#xe870;&#xe870;&#xe870;&#xe870;&#xe870;</i>
         </span>
-        <span class="data">{{comment.commentData}}</span>
+        <span class="data">{{timeFormat(comment.date)}}</span>
+        <span class="user">{{comment.user}}</span>
       </div>
-      <p class="comment-text">{{comment.commentText}}</p>
+      <p class="comment-text">{{comment.content}}</p>
       <div class="comment-img">
         <div
           class="imgouter"
-          v-for="(img, index) in comment.commentImg"
+          v-for="(img, index) in comment.pic"
           :key="index"
         >
           <div class="imginner">
@@ -36,11 +37,16 @@
 export default {
   name: 'DetailComment',
   props: {
-    CommentInfo: Array
+    commentInfo: Array
   },
   methods: {
     showMoreComment () {
       alert('评论功能正在完善哦😘')
+    },
+    timeFormat (date) {
+      let d = new Date(date)
+      let formatdatetime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
+      return formatdatetime
     }
   }
 }
@@ -87,6 +93,15 @@ export default {
             top: .04rem;
             left: 0;
             height: .28rem;
+        .user
+          position: relative;
+          float: right;
+          top: .16rem;
+          margin-left: .6rem;
+          line-height: .34rem;
+          font-size: .24rem;
+          vertical-align: middle;
+          color: #9e9e9e;
         .data
           position: relative;
           float: right;

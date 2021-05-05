@@ -53,6 +53,7 @@ export default {
 <style lang="stylus" scoped>
   .footer
     background #f3f3f3
+    padding-top .5rem
     .main-nav
       position relative
       width 300px

@@ -11,7 +11,7 @@
         class="item border-bottom"
         v-for="item in likeList"
         :key="item.name"
-        :to="'/detail/' + item.name"
+        :to="'/detail/name/' + item.name"
       >
         <div class="item-img-container">
           <img :src="item.imgUrl" class="item-img">

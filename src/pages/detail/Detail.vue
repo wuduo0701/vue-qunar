@@ -1,16 +1,11 @@
 <template>
   <div>
-    <!-- <div
-      v-for="item in allSight"
-      :key="item.id"
-    > -->
     <DetailBanner :bannerInfo="bannerInfo"></DetailBanner>
     <DetailHeader></DetailHeader>
     <DetailInfo :baseInfo="baseInfo"></DetailInfo>
     <DetailTicket :ticketInfo="ticketInfo"></DetailTicket>
-    <!-- <DetailComment :CommentInfo="item.commentInfo"></DetailComment> -->
-    <!-- <DetailFooter></DetailFooter> -->
-    <!-- </div> -->
+    <DetailComment :commentInfo="commentInfo"></DetailComment>
+    <DetailFooter></DetailFooter>
   </div>
 </template>
 <script>
@@ -42,8 +37,13 @@ export default {
       baseInfo: {},
       ticketInfo: {},
       //  景点信息
-      allSight: []
+      allSight: [],
+      commentInfo: []
     }
+  },
+  mounted () {
+    this.name = this.$route.params.name
+    this.getDetailInfo()
   },
   methods: {
     getDetailInfo () {
@@ -68,6 +68,7 @@ export default {
         this.handleBanner(res.bannerImg)
         this.baseInfo = res.baseInfo
         this.handleTicket(res.ticketInfo)
+        this.handleComment(res.commentInfo)
       }
     },
     getDetaiInfoSucc (res) {
@@ -100,15 +101,19 @@ export default {
         })
         info[item] = {}
         Object.assign(info[item], obj1)
-        // info[item].push(obj1)
       })
       this.ticketInfo = info
-      console.log(info)
+    },
+    // 评论
+    handleComment (res) {
+      if (res) {
+        res.forEach(item => {
+          // let temp = ''
+          item.pic = item.pictures.split(',')
+        })
+      }
+      this.commentInfo = res
     }
-  },
-  mounted () {
-    this.name = this.$route.params.name
-    this.getDetailInfo()
   }
 }
 </script>

@@ -11,11 +11,11 @@
           <div class="ticket-group border-bottom">
             <div class="ticket-list-continer border">
               <div
-                v-for="(ticket, index) in Object.keys(ticketInfo[item])"
+                v-for="(ticket) in Object.keys(ticketInfo[item])"
                 :key="ticket"
               >
                 <div class="ticket-list border-top" >
-                  <div class="ticket-type-info" @click="changeShowItem(index)">
+                  <div class="ticket-type-info" @click="changeShowItem(item, ticket)">
                     <h5 class="ticket-type-name">{{ticket}}</h5>
                     <div class="ticket-type-price">
                       <span class="price-money">￥</span>
@@ -28,7 +28,7 @@
                     v-for="(ticketItem, index) in ticketInfo[item][ticket]"
                     :key="index"
                   >
-                    <TicketItem :ticketItem="ticketItem" v-show="switchItem(ticketItem.kind)"></TicketItem>
+                    <TicketItem :ticketItem="ticketItem" v-show="switchItem(item +  '>' + ticketItem.kind)"></TicketItem>
                   </div>
                 </div>
               </div>
@@ -57,15 +57,16 @@ export default {
   },
   methods: {
     //  门票是否展开
-    changeShowItem (index) {
-      if (index === this.Itemindex) {
+    changeShowItem (index, item) {
+      const flag = index + '>' + item
+      if (flag === this.Itemindex) {
         this.Itemindex = ''
       } else {
-        this.Itemindex = index
+        this.Itemindex = flag
       }
     },
-    switchItem (id) {
-      return id === this.Itemindex
+    switchItem (index) {
+      return index === this.Itemindex
     },
     minPrice (arr) {
       let min = 0
