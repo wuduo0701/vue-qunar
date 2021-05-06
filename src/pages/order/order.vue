@@ -20,7 +20,28 @@
           {{btn.name}}
         </van-button>
       </div>
-      <div class="no_info">
+      <div
+        class="box"
+        v-for="info in ticketInfo"
+        :key="info.id"
+        @click="linkDetail(info.name)"
+      >
+        <div class="order-header">
+          <div>
+            <img src="../../assets/imgs/sight.png" class="pic" alt="门票">
+            <span class="sight-text">{{info.name}}</span>
+          </div>
+          <div class="toTravel">待出行</div>
+        </div>
+        <div class="box-flex">
+          <div class="box-header">{{info.ticket_title}}</div>
+          <span class="price">
+            ￥
+            <span class="price-num">{{info.ticket_price}}</span>
+          </span>
+        </div>
+      </div>
+      <!-- <div class="no_info">
         <img src="https://s.qunarzz.com/q_design_font/images/empty.png" alt="">
         <div class="login">
           <div class="dsc">您还没有订单呦~</div>
@@ -33,16 +54,18 @@
             >登录</van-button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 const btnMap = [
   {id: 'all', name: '全部'},
   {id: 'toTravel', name: '待出行'},
-  {id: 'toPay', name: '待付款'},
+  {id: 'expired', name: '已过期'},
   {id: 'refund', name: '退款单'}
 ]
 export default {
@@ -51,7 +74,9 @@ export default {
   data () {
     return {
       activeBtn: 'all',
-      btnMap
+      btnMap,
+      user: localStorage.user,
+      ticketInfo: ''
     }
   },
 
@@ -61,16 +86,39 @@ export default {
     }
   },
 
+  created () {
+    this.getTicket()
+  },
+
   methods: {
     changeBtn (id) {
       this.activeBtn = id
     },
     linkLogin () {
       this.$router.push({ path: '/user/login' })
+    },
+    getTicket () {
+      axios
+        .get(`/v1/order/user`, {
+          params: {
+            user: this.user
+          }
+        })
+        .then((res) => {
+          if (res) {
+            const data = res.data
+            this.ticketInfo = data.data
+          }
+        })
+    },
+    linkDetail (name) {
+      this.$router.push({
+        name: 'Detail',
+        params: {
+          name
+        }
+      })
     }
-    // isLogin () {
-    //   return localStorage.user
-    // }
   }
 }
 </script>
@@ -121,6 +169,50 @@ export default {
         color: rgb(0, 202, 216);
         font-weight: 600;
         opacity: 1;
+      }
+    }
+    .box {
+      margin: .2rem;
+      padding: .16rem;
+      background: #fff;
+      border-radius: .2rem;
+      .order-header {
+        padding: 0 .2rem;
+        height: .6rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .pic {
+          width: .48rem;
+          height: .48rem;
+        }
+        .sight-text {
+          font-size: .32rem;
+        }
+        .toTravel {
+          font-size: .30rem;
+          color: rgb(255, 81, 0);
+        }
+      }
+      .box-flex {
+        padding: 0 0 .2rem .1rem;
+        display: flex;
+        .box-header {
+          display: flex;
+          align-items: center;
+          width: 85%;
+          height: 1rem;
+          color: rgb(32, 29, 29);
+          font-size: .32rem;
+          line-height: .5rem;
+        }
+        .price {
+          padding: .16rem 0 0 .1rem;
+          font-size: .24rem;
+          .price-num {
+            font-size: .32rem;
+          }
+        }
       }
     }
     .no_info {

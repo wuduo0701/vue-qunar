@@ -11,6 +11,7 @@ import Retrieve from '@/pages/login/retrieve.vue'
 import Register from '@/pages/register/register.vue'
 //  订单模块
 import Order from '@/pages/order/order.vue'
+import OrderFill from '@/pages/order/orderFill.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -62,6 +63,11 @@ const router = new Router({
       path: '/order',
       name: 'Order',
       component: Order
+    },
+    {
+      path: '/orderFill/title/:title/price/:price/date/:date',
+      name: 'OrderFill',
+      component: OrderFill
     }
   ],
   // 滚动行为
