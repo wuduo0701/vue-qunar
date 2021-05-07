@@ -2,31 +2,34 @@
   <div class="comment-wrapper border-bottom">
     <div class="comment-space"></div>
     <h3 class="comment-title">用户评论</h3>
-    <div
-      class="comment-item border-top"
-      v-for="comment in commentInfo"
-      :key="comment.id"
-    >
-      <div class="item-data">
-        <span class="star-level">
-          <i class="star iconfont">&#xe870;&#xe870;&#xe870;&#xe870;&#xe870;</i>
-        </span>
-        <span class="data">{{timeFormat(comment.date)}}</span>
-        <span class="user">{{comment.user}}</span>
-      </div>
-      <p class="comment-text">{{comment.content}}</p>
-      <div class="comment-img">
-        <div
-          class="imgouter"
-          v-for="(img, index) in comment.pic"
-          :key="index"
-        >
-          <div class="imginner">
-            <img class="img" :src="img">
+    <div v-if="commentInfo.length">
+      <div
+        class="comment-item border-top"
+        v-for="comment in commentInfo"
+        :key="comment.id"
+      >
+        <div class="item-data">
+          <span class="star-level">
+            <i class="star iconfont">&#xe870;&#xe870;&#xe870;&#xe870;&#xe870;</i>
+          </span>
+          <span class="data">{{timeFormat(comment.date)}}</span>
+          <span class="user">{{comment.user}}</span>
+        </div>
+        <p class="comment-text">{{comment.content}}</p>
+        <div class="comment-img">
+          <div
+            class="imgouter"
+            v-for="(img, index) in comment.pic"
+            :key="index"
+          >
+            <div class="imginner">
+              <img class="img" :src="img">
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div v-else class="no-comment">暂无评论....</div>
     <div class="more-comment border-top" @click="showMoreComment">
       查看全部点评
       <span class="iconfont">&#xe612;</span>
@@ -41,7 +44,12 @@ export default {
   },
   methods: {
     showMoreComment () {
-      alert('评论功能正在完善哦😘')
+      this.$router.push({
+        name: 'commentAll',
+        params: {
+          name: this.$route.params.name
+        }
+      })
     },
     timeFormat (date) {
       let d = new Date(date)
@@ -70,6 +78,13 @@ export default {
       line-height: .56rem;
       font-weight: bold;
       padding .32rem 0 0 .16rem
+    .no-comment
+      height 1rem
+      line-height 1rem
+      padding .2rem
+      font-size .30rem
+      font-weight 400
+      // color #ddd
     .comment-item
       padding: .1rem .2rem .3rem .2rem;
       .item-data

@@ -108,8 +108,9 @@ export default {
     handleComment (res) {
       if (res) {
         res.forEach(item => {
-          // let temp = ''
-          item.pic = item.pictures.split(',')
+          if (item.pictures) {
+            item.pic = item.pictures.split(',')
+          }
         })
       }
       this.commentInfo = res

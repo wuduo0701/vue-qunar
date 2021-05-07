@@ -12,6 +12,9 @@ import Register from '@/pages/register/register.vue'
 //  订单模块
 import Order from '@/pages/order/order.vue'
 import OrderFill from '@/pages/order/orderFill.vue'
+// 评论模块
+import commentAll from '@/pages/comment/commentAll.vue'
+import addComment from '@/pages/comment/addComment.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -68,6 +71,16 @@ const router = new Router({
       path: '/orderFill/title/:title/price/:price/date/:date',
       name: 'OrderFill',
       component: OrderFill
+    },
+    {
+      path: '/comment/name/:name',
+      name: 'commentAll',
+      component: commentAll
+    },
+    {
+      path: '/comment/addComment/:name',
+      name: 'addComment',
+      component: addComment
     }
   ],
   // 滚动行为

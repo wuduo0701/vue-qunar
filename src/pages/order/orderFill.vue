@@ -84,7 +84,7 @@ export default {
           phone,
           id_card: idCard,
           ticket_title: this.title,
-          ticket_price: this.price,
+          ticket_price: `${this.price}`,
           ticket_num: this.number,
           buy_date: this.date,
           total_price: this.price * this.number
@@ -93,15 +93,17 @@ export default {
           .post('/v1/order', query)
           .then(res => {
             console.log(res)
+            Toast.success('购票成功')
+            this.goReturn()
           })
           .catch(err => {
             console.log(err)
+            Toast.fail('购票失败')
           })
           .finally(() => {
             this.loading = false
           })
-        Toast.success('购票成功')
-        this.goReturn()
+        // this.goReturn()
       }
     },
     timeFormat (date) {
@@ -167,7 +169,7 @@ export default {
           line-height: .5rem;
         }
         .price {
-          padding: .16rem 0 0 .1rem;
+          padding: .16rem 0 0 0rem;
           color: red;
           font-size: .24rem;
           .price-num {

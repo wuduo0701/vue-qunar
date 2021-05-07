@@ -106,6 +106,7 @@
   </div>
 </template>
 <script>
+import { Toast } from 'vant'
 export default {
   name: 'TicketItem',
   props: {
@@ -171,19 +172,22 @@ export default {
       this.active = 'other'
     },
     booking (title, price, date) {
-      console.log(title, price)
-      this.$router.push({
-        name: 'OrderFill',
-        params: {
-          title,
-          price,
-          date
-        },
-        query: {
-          name: this.$route.params.name
-        }
-      })
-      // Toast.success('预定成功')
+      if (!localStorage.user) {
+        Toast.fail('您还未登录哦')
+        this.$router.push({ path: '/user/login' })
+      } else {
+        this.$router.push({
+          name: 'OrderFill',
+          params: {
+            title,
+            price,
+            date
+          },
+          query: {
+            name: this.$route.params.name
+          }
+        })
+      }
     }
   }
 }

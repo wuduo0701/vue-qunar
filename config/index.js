@@ -22,6 +22,9 @@ module.exports = {
         pathRewrite: {
           '^/v1': '/'
         }
+      },
+      '/touch': {
+        target: 'https://touch.piao.qunar.com'
       }
     },
 

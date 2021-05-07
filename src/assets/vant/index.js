@@ -7,7 +7,10 @@ import {
   Popup,
   DatetimePicker,
   Stepper,
-  SubmitBar
+  SubmitBar,
+  Loading,
+  Swipe,
+  SwipeItem
 } from 'vant'
 
 Vue.use(Field)
@@ -18,5 +21,8 @@ Vue.use(Popup)
 Vue.use(DatetimePicker)
 Vue.use(Stepper)
 Vue.use(SubmitBar)
+Vue.use(Loading)
+Vue.use(Swipe)
+Vue.use(SwipeItem)
 
 export default Vue

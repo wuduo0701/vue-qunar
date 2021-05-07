@@ -20,28 +20,37 @@
           {{btn.name}}
         </van-button>
       </div>
-      <div
-        class="box"
-        v-for="info in ticketInfo"
-        :key="info.id"
-        @click="linkDetail(info.name)"
-      >
-        <div class="order-header">
-          <div>
-            <img src="../../assets/imgs/sight.png" class="pic" alt="门票">
-            <span class="sight-text">{{info.name}}</span>
+      <div v-if="filter.length">
+        <div
+          class="box"
+          v-for="info in filter"
+          :key="info.id"
+          @click="linkDetail(info.name)"
+        >
+          <div class="order-header">
+            <div>
+              <img src="../../assets/imgs/sight.png" class="pic" alt="门票">
+              <span class="sight-text">{{info.name}}</span>
+            </div>
+            <div :class="mapClass(info.buy_date)">{{getStatus(info.buy_date)}}</div>
           </div>
-          <div class="toTravel">待出行</div>
-        </div>
-        <div class="box-flex">
-          <div class="box-header">{{info.ticket_title}}</div>
-          <span class="price">
-            ￥
-            <span class="price-num">{{info.ticket_price}}</span>
-          </span>
+          <div class="box-flex">
+            <div class="box-header">{{info.ticket_title}}</div>
+            <span class="price">
+              ￥
+              <span class="price-num">{{info.ticket_price}}</span>
+            </span>
+          </div>
+          <div class="box-date">
+            <div>
+              <p class="order-date">{{timeFormat(info.buy_date)}} 当日</p>
+              <p class="order-num">数量 {{info.ticket_num}}</p>
+            </div>
+            <div class="order-total">总价 ￥{{info.total_price}}</div>
+          </div>
         </div>
       </div>
-      <!-- <div class="no_info">
+      <div class="no_info" v-else>
         <img src="https://s.qunarzz.com/q_design_font/images/empty.png" alt="">
         <div class="login">
           <div class="dsc">您还没有订单呦~</div>
@@ -54,7 +63,7 @@
             >登录</van-button>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -76,7 +85,8 @@ export default {
       activeBtn: 'all',
       btnMap,
       user: localStorage.user,
-      ticketInfo: ''
+      ticketInfo: '',
+      filter: []
     }
   },
 
@@ -87,7 +97,21 @@ export default {
   },
 
   created () {
-    this.getTicket()
+    // eslint-disable-next-line no-unused-expressions
+    localStorage.user ? this.getTicket() : ''
+  },
+
+  watch: {
+    'activeBtn': {
+      handler () {
+        if (!localStorage.user) {
+          return
+        }
+        this.filter = []
+        this.filterInfo()
+      },
+      immediate: true
+    }
   },
 
   methods: {
@@ -108,6 +132,7 @@ export default {
           if (res) {
             const data = res.data
             this.ticketInfo = data.data
+            this.filter = data.data
           }
         })
     },
@@ -118,6 +143,57 @@ export default {
           name
         }
       })
+    },
+    filterInfo () {
+      if (this.activeBtn === 'all') {
+        this.filter = this.ticketInfo
+      } else if (this.activeBtn === 'toTravel') {
+        this.ticketInfo.forEach(item => {
+          if (this.transTamp(item.buy_date) >= this.getNow()) {
+            this.filter.push(item)
+          }
+        })
+      } else if (this.activeBtn === 'expired') {
+        this.ticketInfo.forEach(item => {
+          if (this.transTamp(item.buy_date) < this.getNow()) {
+            this.filter.push(item)
+          }
+        })
+      }
+    },
+    // 转化时间格式
+    timeFormat (date) {
+      let d = new Date(date)
+      const year = d.getFullYear()
+      const month = (d.getMonth() + 1) < 10 ? `0${(d.getMonth() + 1)}` : (d.getMonth() + 1)
+      const day = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate()
+      let formatdatetime = year + '-' + month + '-' + day
+      return formatdatetime
+    },
+    // 某现在零点的时间戳
+    getNow () {
+      let date = new Date()
+      return new Date(new Date(new Date(date).toLocaleDateString())).getTime()
+    },
+    // 转化位时间戳
+    transTamp (date) {
+      date = new Date(date)
+      let tamp = date.setTime(date.getTime())
+      return tamp
+    },
+    getStatus (date) {
+      if (this.transTamp(date) >= this.getNow()) {
+        return '待出行'
+      } else {
+        return '已过期'
+      }
+    },
+    mapClass (date) {
+      if (this.transTamp(date) >= this.getNow()) {
+        return 'toTravel'
+      } else {
+        return 'expried'
+      }
     }
   }
 }
@@ -126,7 +202,7 @@ export default {
 <style lang="scss" scoped>
 .order {
   background: rgb(237, 239, 242);
-  height: 100vh;
+  min-height: 100vh;
   .header {
     position: relative;
     overflow: hidden;
@@ -191,6 +267,10 @@ export default {
         }
         .toTravel {
           font-size: .30rem;
+          color: rgb(14, 165, 22);
+        }
+        .expried {
+          font-size: .30rem;
           color: rgb(255, 81, 0);
         }
       }
@@ -212,6 +292,24 @@ export default {
           .price-num {
             font-size: .32rem;
           }
+        }
+      }
+      .box-date {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .order-date {
+          height: .5rem;
+          line-height: .5rem;
+        }
+        .order-num {
+          height: .5rem;
+          line-height: .5rem;
+        }
+        .order-total {
+          height: 1rem;
+          line-height: 1rem;
+          font-size: .32rem;
         }
       }
     }

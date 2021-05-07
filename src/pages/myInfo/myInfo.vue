@@ -5,7 +5,7 @@
       <img src="https://s.qunarzz.com/usercenter_mobile/images/my/mybgnew-20161111.jpg" class="backImg" alt="背景">
       <div class="info-content">
         <div class="avator-container">
-          <router-link to="/user/login" v-if="!user.length">
+          <router-link to="/user/login" v-if="!Object.keys(userInfo).length">
             <img src="https://source.qunarzz.com/usercenter/touch/avatar.png" class="avator" alt="头像">
             <span class="unLogin">登录/注册</span>
           </router-link>
@@ -42,13 +42,15 @@
       </div>
     </div>
     <div class="list">
-      <div class="list_name">
-        <span class="common order">
-          <i class="iconfont">&#xe659;</i>
-        </span>
-        <span class="name">我的订单</span>
-        <i class="iconfont link">&#xe68c;</i>
-      </div>
+      <router-link to="/order">
+        <div class="list_name">
+          <span class="common order">
+            <i class="iconfont">&#xe659;</i>
+          </span>
+          <span class="name">我的订单</span>
+          <i class="iconfont link">&#xe68c;</i>
+        </div>
+      </router-link>
       <div class="list_name">
         <span class="common comment">
           <i class="iconfont">&#xe601;</i>
@@ -73,19 +75,23 @@
         <i class="iconfont link">&#xe68c;</i>
       </div>
     </div>
+    <div class="list" v-if="Object.keys(userInfo).length">
+      <van-button type="primary" size="large" color="#00bcd4" @click="unLogin">退出登录</van-button>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { Toast } from 'vant'
 
 export default {
   name: 'MyInfo',
 
   data () {
     return {
-      user: '',
-      userInfo: ''
+      user: [],
+      userInfo: {}
     }
   },
 
@@ -110,6 +116,12 @@ export default {
             this.userInfo = res.data.data
           }
         })
+    },
+    unLogin () {
+      document.cookie = ''
+      localStorage.removeItem('user')
+      Toast.success('退出成功')
+      location.reload()
     }
   }
 }

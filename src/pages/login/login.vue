@@ -36,7 +36,7 @@
         >登录</van-button>
         <van-button v-else type="primary" class="login_btn" @click="login">登录</van-button>
       </div>
-      <div class="retrieve" @click="retrieve">找回密码</div>
+      <div class="retrieve" @click="retrieve">忘记密码?</div>
       <div class="tip"></div>
     </div>
   </div>
