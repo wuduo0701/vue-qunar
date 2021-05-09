@@ -6,7 +6,7 @@
           class="icon"
           v-for="item in page"
           :key="item.title"
-          @click="showIcon"
+          @click="showIcon(item.title)"
         >
           <div class="iconImg">
             <img class="img-content" :src="item.imgUrl">
@@ -45,8 +45,8 @@ export default {
     }
   },
   methods: {
-    showIcon () {
-      alert('功能模块正在完善中')
+    showIcon (title) {
+      this.$router.push({ path: `/leaderBoard/title/${title}` })
     }
   }
 }

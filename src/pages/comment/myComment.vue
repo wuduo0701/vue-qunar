@@ -1,14 +1,10 @@
 <template>
   <div class="commentAll">
     <div class="header">
-      <div>全部评论</div>
+      <div>我的评论</div>
       <div class="iconfont back" @click="goBack">&#xe624;</div>
     </div>
-    <div class="comment">综合评分
-      <i class="iconfont" style="color:#ffb436;">&#xe870;&#xe870;&#xe870;&#xe870;&#xe870;</i>
-      <span>&nbsp;&nbsp;&nbsp;5分</span>
-    </div>
-    <div class="comment-box" v-for="comment in commentInfo" :key="comment.id">
+    <div class="comment-box" v-for="comment in commentInfo" :key="comment.id" @click="toDetail(comment.name)">
       <div class="top">
         <img class="userImg" src="https://img1.qunarzz.com/ucenter/headshot/1806/ad/9e146fc6c5c274ba.png_r_150x150_a3ba7c76.png" alt="">
         <div class="comment-headcon">
@@ -20,6 +16,7 @@
           <i class="iconfont" style="color:#ffb436;" v-if="comment.score === 5">&#xe870;</i>
           <div class="comment-info">{{timeFormat(comment.date)}}</div>
         </div>
+        <div class="sight-name">{{comment.name}}</div>
       </div>
       <div class="comment-detail">{{comment.content}}</div>
       <div class="comment-show" v-if="comment.pic">
@@ -27,7 +24,6 @@
       </div>
       <div class="ticket-buy" v-if="comment.sight_title">{{comment.sight_title}}</div>
     </div>
-    <div class="addcomment" @click="addComment">点评</div>
   </div>
 </template>
 
@@ -50,10 +46,9 @@ export default {
     },
     getComment () {
       axios
-        .get('/v1/comment', {
+        .get('/v1/comment/user', {
           params: {
-            city: localStorage.city,
-            name: this.$route.params.name
+            user: localStorage.user
           }
         })
         .then(res => {
@@ -88,6 +83,9 @@ export default {
     },
     addComment () {
       this.$router.push({ name: 'addComment', params: this.$route.params.name })
+    },
+    toDetail (name) {
+      this.$router.push({ path: `/detail/name/${name}` })
     }
   }
 }
@@ -148,6 +146,14 @@ export default {
           margin-right: .1rem;
           font-size: .24rem;
         }
+      }
+      .sight-name {
+        float: right;
+        height: .6rem;
+        line-height: .6rem;
+        padding-right: .6rem;
+        font-size: .30rem;
+        color: #616161;
       }
     }
     .comment-detail {

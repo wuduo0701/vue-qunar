@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import Home from '@/pages/home/Home'
 import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail'
@@ -15,6 +16,9 @@ import OrderFill from '@/pages/order/orderFill.vue'
 // 评论模块
 import commentAll from '@/pages/comment/commentAll.vue'
 import addComment from '@/pages/comment/addComment.vue'
+import myComment from '@/pages/comment/myComment.vue'
+// 热门榜单
+import leaderBoard from '@/common/leaderBoard/leaderBoard'
 
 Vue.use(Router)
 const router = new Router({
@@ -26,7 +30,7 @@ const router = new Router({
       component: Home
     },
     {
-      path: '/weekendgo/:name',
+      path: '/weekendgo/:title',
       name: 'WekendGo',
       component: WekendGo
     },
@@ -62,6 +66,7 @@ const router = new Router({
       name: 'Register',
       component: Register
     },
+    // 订单
     {
       path: '/order',
       name: 'Order',
@@ -72,6 +77,7 @@ const router = new Router({
       name: 'OrderFill',
       component: OrderFill
     },
+    // 评论
     {
       path: '/comment/name/:name',
       name: 'commentAll',
@@ -81,6 +87,16 @@ const router = new Router({
       path: '/comment/addComment/:name',
       name: 'addComment',
       component: addComment
+    },
+    {
+      path: '/comment/myComment/:user',
+      name: 'myComment',
+      component: myComment
+    },
+    {
+      path: '/leaderBoard/title/:title',
+      name: 'leaderBoard',
+      component: leaderBoard
     }
   ],
   // 滚动行为

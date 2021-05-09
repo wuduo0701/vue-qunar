@@ -2,7 +2,7 @@
   <div style="padding-bottom: 50px">
     <div class="weekend-title">周末去哪儿</div>
     <ul>
-      <li class="weekend-item" v-for="item in weekendList" :key="item.id" @click="showWeekList(item.productName)">
+      <li class="weekend-item" v-for="item in weekendList" :key="item.id" @click="showWeekList(item.title)">
         <div class="item-img-container">
           <img class="item-img" :src="item.imgUrl">
         </div>

@@ -1,22 +1,22 @@
 <template>
   <div class="page">
     <div class="header">
-      {{productName}}
+      {{title}}
       <router-link to="/">
         <div class="iconfont back">&#xe624;</div>
       </router-link>
     </div>
     <div v-for="item in product" :key="item.id">
-      <div class="product" @click="showDetial(item.id)">
+      <div class="product" @click="showDetial(item.sight_name)">
         <div class="product-img">
-          <img :src="item.img">
+          <img :src="item.sight_img">
         </div>
         <div class="product-info">
-          <p class="product-name">{{item.name}}</p>
-          <p class="product-desc">{{item.desc}}</p>
+          <p class="product-name">{{item.sight_name}}</p>
+          <p class="product-desc">{{item.sight_info}}</p>
           <div class="product-price">
             <span class="price">￥
-              <em class="price-num">{{item.price}}</em>
+              <em class="price-num">{{item.sight_price}}</em>
               <span class="price-start">起</span>
             </span>
           </div>
@@ -31,35 +31,42 @@ export default {
   name: 'weekendGo',
   data () {
     return {
-      productName: '',
+      title: '',
       product: []
     }
   },
+
+  created () {
+    this.title = this.$route.params.title
+    this.getWeekendInfo()
+  },
+
   methods: {
-    getproductName () {
-      this.productName = this.$route.params.name
-    },
     getWeekendInfo () {
-      axios.get('/api/weekendgo.json')
-        .then(this.getWeekendInfoInfoSucc)
-    },
-    getWeekendInfoInfoSucc (res) {
-      res = res.data
-      const wenkendGo = res.data.wenkendGo
-      if (res.success && res.data) {
-        const product = wenkendGo.filter(item => {
-          return item.name === this.productName
+      axios
+        .get('/v1/weekendgo', {
+          params: {
+            city: localStorage.city,
+            title: this.$route.params.title
+          }
         })
-        this.product = product[0].data
+        .then(this.getWeekendInfoSucc)
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getWeekendInfoSucc (res) {
+      res = res.data
+      if (res.status === 'success') {
+        this.product = res.data
       }
     },
     // 跳转到详情页
-    showDetial (id) {
-      this.$router.push({ path: `/detail/${id}` })
+    showDetial (name) {
+      this.$router.push({ path: `/detail/name/${name}` })
     }
   },
   activated  () {
-    this.getproductName()
     this.getWeekendInfo()
   }
 }

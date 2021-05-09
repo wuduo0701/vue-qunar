@@ -45,7 +45,8 @@ export default {
   },
   methods: {
     showAllSight () {
-      alert('页面还在完善中...😵')
+      let title = '本周热门榜单'
+      this.$router.push({ path: `/leaderBoard/title/${title}` })
     },
     //  路由跳转
     changeRouter (name) {

@@ -51,7 +51,7 @@
           <i class="iconfont link">&#xe68c;</i>
         </div>
       </router-link>
-      <div class="list_name">
+      <div class="list_name" @click="myComment">
         <span class="common comment">
           <i class="iconfont">&#xe601;</i>
         </span>
@@ -122,6 +122,12 @@ export default {
       localStorage.removeItem('user')
       Toast.success('退出成功')
       location.reload()
+    },
+    myComment () {
+      if (!this.user) {
+        return
+      }
+      this.$router.push({ path: `/comment/myComment/${this.user}` })
     }
   }
 }

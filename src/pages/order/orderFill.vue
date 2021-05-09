@@ -92,7 +92,6 @@ export default {
         axios
           .post('/v1/order', query)
           .then(res => {
-            console.log(res)
             Toast.success('购票成功')
             this.goReturn()
           })
@@ -103,7 +102,6 @@ export default {
           .finally(() => {
             this.loading = false
           })
-        // this.goReturn()
       }
     },
     timeFormat (date) {

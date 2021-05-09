@@ -1,14 +1,16 @@
 <template>
   <div>
-    <router-link
+    <!-- <router-link
       tag="div"
       to="/"
       class="header-back"
       v-show="showHeaderBack"
-    >
+    > -->
+    <div class="header-back" v-show="showHeaderBack" @click="goBack">
       <span class="header-back-bg"></span>
       <span class="header-back-icon iconfont">&#xe624;</span>
-    </router-link>
+    </div>
+    <!-- </router-link> -->
     <div
       class="header-fixed"
       v-show="!showHeaderBack"
@@ -45,6 +47,9 @@ export default {
       } else {
         this.showHeaderBack = true
       }
+    },
+    goBack () {
+      this.$router.go(-1)
     }
   },
   // keep-alive的exclude的存在会使activated生命周期函数失效,所有改为mounted
